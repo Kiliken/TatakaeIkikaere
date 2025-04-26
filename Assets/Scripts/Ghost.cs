@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Ghost : MonoBehaviour
 {
-    private Vector2Int gridPosition;
+    public Vector2Int gridPosition;
 
     void Start()
     {
@@ -19,6 +19,7 @@ public class Ghost : MonoBehaviour
             gridPosition = newGridPos;
         }
     }
+
 
     private bool IsValidPosition(Vector2Int prevPos, Vector2Int newPos)
     {

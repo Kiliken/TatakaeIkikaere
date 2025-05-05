@@ -7,6 +7,7 @@ public class AttackController : MonoBehaviour
 
     public static AttackController Instance;
     public int currentAttackType = 8;
+    public bool hasCenter = false;
     public Vector2Int center = new Vector2Int(-10, -19);
 
     private void Awake()
@@ -18,6 +19,7 @@ public class AttackController : MonoBehaviour
 
     public bool IsTileAttackPattern(Vector2Int checkPos)
     {
+
         Vector2Int offset = checkPos - center;
 
         switch (currentAttackType)

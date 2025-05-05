@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class EnemyButtonScript : MonoBehaviour, IPointerEnterHandler
+public class EnemyButtonScript : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public Vector2Int gridPosition;
     private Image panelImage;
@@ -25,7 +25,11 @@ public class EnemyButtonScript : MonoBehaviour, IPointerEnterHandler
 
     public void CheckStatus()
     {
-        if (AttackController.Instance.IsTileAttackPattern(gridPosition))
+        if (AttackController.Instance.hasCenter == false)
+        {
+            SetPanelTransparent();
+        }
+        else if (AttackController.Instance.IsTileAttackPattern(gridPosition))
         {
             SetPanelVisible();
         }
@@ -42,7 +46,13 @@ public class EnemyButtonScript : MonoBehaviour, IPointerEnterHandler
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        AttackController.Instance.hasCenter = true;
         AttackController.Instance.center = gridPosition;
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        AttackController.Instance.hasCenter = false;
     }
 
     private void SetPanelTransparent()

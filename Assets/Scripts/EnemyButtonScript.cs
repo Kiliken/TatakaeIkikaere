@@ -46,13 +46,13 @@ public class EnemyButtonScript : MonoBehaviour, IPointerEnterHandler, IPointerEx
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        AttackController.Instance.hasCenter = true;
-        AttackController.Instance.center = gridPosition;
+        //AttackController.Instance.hasCenter = true;
+        //AttackController.Instance.center = gridPosition;
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        AttackController.Instance.hasCenter = false;
+       // AttackController.Instance.hasCenter = false;
     }
 
     private void SetPanelTransparent()

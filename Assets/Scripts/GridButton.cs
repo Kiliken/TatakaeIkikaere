@@ -105,7 +105,7 @@ public class GridButton : MonoBehaviour
     private void SetVisible(Image img)
     {
         Color color = img.color;
-        color.a =  0.25f;
+        color.a =  1f;
         img.color = color;
     }
 

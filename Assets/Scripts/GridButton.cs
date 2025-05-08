@@ -10,6 +10,8 @@ public class GridButton : MonoBehaviour
     public bool isAttackButton;
     public bool aimed;
 
+    private Animator animator;
+
     private void Start()
     {
 
@@ -17,6 +19,10 @@ public class GridButton : MonoBehaviour
         SetTransparent(panelImage);
         attackAim = transform.Find("AttackAim").GetComponent<Image>();
         SetTransparent(attackAim);
+        if (isAttackButton)
+        {
+            animator = transform.Find("AttackAim").GetComponent<Animator>();
+        }
         //attackImage = transform.Find("AttackImage").GetComponent<Image>();
         //SetTransparent(attackImage);
     }
@@ -59,6 +65,15 @@ public class GridButton : MonoBehaviour
         else
         {
             SetTransparent(attackAim);
+        }
+
+        if (AttackController.Instance.center == gridPosition)
+        {
+            animator.SetBool("IsCenter", true);
+        }
+        else
+        {
+            animator.SetBool("IsCenter", false);
         }
     }
 
@@ -118,7 +133,7 @@ public class GridButton : MonoBehaviour
 
     private bool InProx(Vector2Int g)
     {
-        return Vector2Int.Distance(g, gridPosition) <= 1f;
+        return Vector2Int.Distance(g, gridPosition) <= 1f && Vector2Int.Distance(g, gridPosition) > 0f;
     }
 
 }

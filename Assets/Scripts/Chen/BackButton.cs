@@ -1,0 +1,22 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class BackButton : MonoBehaviour
+{
+    public GameObject notPressedObj;
+
+    public float pressDuration = 0.1f;
+
+    public void OnClick()
+    {
+        StartCoroutine(PressRoutine());
+    }
+
+    private IEnumerator PressRoutine()
+    {
+        notPressedObj.SetActive(false);
+        yield return new WaitForSeconds(pressDuration);
+        notPressedObj.SetActive(true);
+    }
+}

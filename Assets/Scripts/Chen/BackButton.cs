@@ -11,6 +11,7 @@ public class BackButton : MonoBehaviour
     public void OnClick()
     {
         StartCoroutine(PressRoutine());
+        GameController.Instance.back();
     }
 
     private IEnumerator PressRoutine()

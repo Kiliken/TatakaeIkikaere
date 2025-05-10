@@ -5,24 +5,27 @@ public class GridButton : MonoBehaviour
 {
     public Vector2Int gridPosition;
     private Image panelImage;
+    private Image destination;
     private Image attackAim;
+    private Image centerAttackAim;
     //private Image attackImage;
     public bool isAttackButton;
     public bool aimed;
-
-    private Animator animator;
+    public bool isCenter;
 
     private void Start()
     {
 
         panelImage = transform.Find("Panel").GetComponent<Image>();
         SetTransparent(panelImage);
+        destination = transform.Find("DestinationPointer").GetComponent<Image>();
+        SetTransparent(destination);
         attackAim = transform.Find("AttackAim").GetComponent<Image>();
         SetTransparent(attackAim);
-        if (isAttackButton)
-        {
-            animator = transform.Find("AttackAim").GetComponent<Animator>();
-        }
+        centerAttackAim = transform.Find("AttackAimCenter").GetComponent<Image>();
+        SetTransparent(centerAttackAim);
+
+
         //attackImage = transform.Find("AttackImage").GetComponent<Image>();
         //SetTransparent(attackImage);
     }
@@ -42,14 +45,19 @@ public class GridButton : MonoBehaviour
 
     public void CheckStatusPlayer()
     {
-        if (InProx(FindObjectOfType<Ghost>().gridPosition))
+       if(GameController.Instance.actionMode == 0)
         {
-            SetVisible(panelImage);
+            if (InProx(FindObjectOfType<Ghost>().gridPosition))
+            {
+                SetVisible(panelImage);
+            }
+            else
+            {
+                SetTransparent(panelImage);
+            }
         }
-        else
-        {
-            SetTransparent(panelImage);
-        }
+        
+        
     }
 
     public void CheckStatusOpponent()
@@ -57,24 +65,24 @@ public class GridButton : MonoBehaviour
         if (AttackController.Instance.hasCenter == false)
         {
             SetTransparent(attackAim);
+            SetTransparent(centerAttackAim);
+        }
+        else if (AttackController.Instance.IsTileAttackPattern(gridPosition) && AttackController.Instance.center == gridPosition)
+        {
+            SetVisible(centerAttackAim);
+            SetTransparent(attackAim);
         }
         else if (AttackController.Instance.IsTileAttackPattern(gridPosition))
         {
             SetVisible(attackAim);
-        }
+            SetTransparent(centerAttackAim);
+        } 
         else
         {
             SetTransparent(attackAim);
+            SetTransparent(centerAttackAim);
         }
 
-        if (AttackController.Instance.center == gridPosition)
-        {
-            animator.SetBool("IsCenter", true);
-        }
-        else
-        {
-            animator.SetBool("IsCenter", false);
-        }
     }
 
 
@@ -92,7 +100,13 @@ public class GridButton : MonoBehaviour
         
     }
 
-    private void movePlayer()
+    private void setDestination()
+    {
+        GameController.Instance.setActionMove(gridPosition);
+        
+    }
+
+   public void movePlayer()
     {
         Vector3 worldPos = transform.position;
         worldPos.z = 0f;

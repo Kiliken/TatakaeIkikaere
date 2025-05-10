@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 
@@ -9,7 +11,9 @@ public static class NetManager {
 
     public static readonly string CreateSession = $"{SERVER}createSession.php?";
 
-    public static readonly string textTest = $"{SERVER}exchangeTest.php?";
+    public static readonly string sendText = $"{SERVER}sendTest.php?";
+
+    public static readonly string receveText = $"{SERVER}receveTest.php?";
 
 
     //SERVER ASSERT
@@ -24,6 +28,7 @@ public static class NetManager {
     }
 }
 
+
 public class JsonMessage
 {
     
@@ -31,18 +36,9 @@ public class JsonMessage
 
     //Session id
     public string id;
-
-    
-    
-
-    public NetPlayer player;
-
-    public struct NetPlayer
-    {
-        //Current player
-        public string side;
-
-        //DEBUG TEST
-        public string text;
-    }
+    //DEBUG TEST
+    public string RText;
+    public string BText;
 }
+
+

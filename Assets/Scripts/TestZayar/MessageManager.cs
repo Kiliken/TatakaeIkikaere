@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class MessageManager : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class MessageManager : MonoBehaviour
     private bool typing = false;
     public string p1Message;
     public string p2Message;
+    [SerializeField] int playerSide = 1;
     float messageTime = 3f;
     float messageTimer = 0f;
     private bool dataSent = false;
@@ -88,5 +90,30 @@ public class MessageManager : MonoBehaviour
         p1Message = p1Text.text;
         dataSent = true;
         Debug.Log("Sending data...");
+        StartCoroutine(DataFromWeb($"{NetManager.sendText}id=123&side={playerSide}&text={p1Message}"));
+    }
+
+    IEnumerator DataFromWeb(string path)
+    {
+        UnityWebRequest uwr = UnityWebRequest.Get(path);
+
+
+        yield return uwr.SendWebRequest();
+
+        if (uwr.result != UnityWebRequest.Result.Success)
+        {
+            Debug.LogError("ERROR: File not found");
+            //RETURN TO MAIN MENU
+        }
+        else
+        {
+            string results = uwr.downloadHandler.text;
+            var data = JsonUtility.FromJson<JsonMessage>(results);
+            Debug.Log(results);
+
+            NetManager.ASSERT(data.sts);
+        }
+
+        uwr.Dispose();
     }
 }

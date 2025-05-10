@@ -37,7 +37,7 @@ public class PhpTest : MonoBehaviour
 
         if (Input.GetKeyUp(KeyCode.G))
         {
-            StartCoroutine(ReadCSVFromWeb($"{NetManager.textTest}id=123"));
+            StartCoroutine(ReadCSVFromWeb($"{NetManager.sendText}id=123"));
         }
         if (Input.GetKeyUp(KeyCode.S))
         {
@@ -66,7 +66,8 @@ public class PhpTest : MonoBehaviour
             NetManager.ASSERT(data.sts);
 
             //DO SOMETHING
-            _text.text = $"{data.id}";
+            _text.text = $"{data.RText}";
+
 
         }
 

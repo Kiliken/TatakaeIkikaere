@@ -8,6 +8,7 @@ public class AttackImage : MonoBehaviour
     {
         GameController.Instance.resetMode();
         //this.gameObject.SetActive(false );
+        AttackController.Instance.center = new Vector2Int(1,1);
     }
 
 }

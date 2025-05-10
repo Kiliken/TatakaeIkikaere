@@ -135,7 +135,7 @@ public class GameController : MonoBehaviour
         } 
         else if (actionMode == 3)
         {
-            AttackController.Instance.ExecuteAttack();
+            
             for (int x = 0; x < 3; x++)
             {
                 for (int y = 0; y < 3; y++)
@@ -149,6 +149,8 @@ public class GameController : MonoBehaviour
                        
                 }
             }
+
+            AttackController.Instance.ExecuteAttack();
 
         }
         

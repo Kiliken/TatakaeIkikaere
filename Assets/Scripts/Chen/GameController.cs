@@ -15,7 +15,7 @@ public class GameController : MonoBehaviour
     //  attack:       2 
     public int actionMode;
 
-    private Vector2Int moveDestination;
+    public Vector2Int moveDestination;
 
     private Vector2Int attackCenter;
     private int attackType;
@@ -35,33 +35,35 @@ public class GameController : MonoBehaviour
 
         int count = 0;
 
-        for (int i = 0; i < 3; i++)
+        for (int py = 0; py < 3; py++)
         {
-            for (int j = 0; j < 3; j++)
+            for (int px = 0; px < 3; px++)
             {
-                playerButtons[j, i] = playerGridButtons[count];
+                playerButtons[px, py] = playerGridButtons[count];
                 count++;
             }
+
         }
+
         count = 0;
-        for (int i = 0; i < 3; i++)
+        for (int oy = 0; oy < 3; oy++)
         {
-            for (int j = 0; j < 3; j++)
+            for (int ox = 0; ox < 3; ox++)
             {
-                oppoButtons[j, i] = opponentGridButtons[count];
+                oppoButtons[ox, oy] = opponentGridButtons[count];
                 count++;
             }
         }
 
-        playerGridButtons[6].movePlayer();
+        //playerButtons[1, 0].movePlayer();
 
     }
-
     // Update is called once per frame
     void Update()
     {
         if (actionMode == 0)
         {
+
         }
         else if (actionMode == 1)
         {
@@ -72,11 +74,11 @@ public class GameController : MonoBehaviour
 
         }
     }
-
     // Sets Action Mode to moving(1)
     public void setActionMove(Vector2Int destination)
     {
         actionMode = 1;
+        moveDestination = destination; 
     }
 
     public void setActionAttack(Vector2Int center, int attackType)
@@ -88,7 +90,7 @@ public class GameController : MonoBehaviour
     {
         if(actionMode == 1)
         {
-
+            playerButtons[moveDestination.x, moveDestination.y].movePlayer();
         } 
         else if (actionMode == 2)
         {

@@ -47,6 +47,7 @@ public class GridButton : MonoBehaviour
     {
        if(GameController.Instance.actionMode == 0)
         {
+            SetTransparent(destination);
             if (InProx(FindObjectOfType<Ghost>().gridPosition))
             {
                 SetVisible(panelImage);
@@ -54,6 +55,24 @@ public class GridButton : MonoBehaviour
             else
             {
                 SetTransparent(panelImage);
+            }
+       }
+       else if (GameController.Instance.actionMode == 1)
+       {
+            if (GameController.Instance.moveDestination == gridPosition)
+            {
+                SetVisible(destination);
+                SetTransparent(panelImage);
+            }
+            else if (InProx(FindObjectOfType<Ghost>().gridPosition))
+            { 
+                SetVisible(panelImage);
+                SetTransparent(destination);
+            }
+            else
+            {
+                SetTransparent(panelImage);
+                SetTransparent(destination);
             }
         }
         
@@ -91,7 +110,7 @@ public class GridButton : MonoBehaviour
 
         if (!isAttackButton)
         {
-            movePlayer();
+            setDestination();
         }
         else
         {

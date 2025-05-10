@@ -15,7 +15,10 @@ public class AttackController : MonoBehaviour
         Instance = this;
     }
 
+    public void ExecuteAttack()
+    {
 
+    }
 
     public bool IsTileAttackPattern(Vector2Int checkPos)
     {

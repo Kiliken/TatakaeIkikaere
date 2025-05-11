@@ -40,7 +40,7 @@ public class MessageManager : MonoBehaviour
                 SendData();
                 // RECEIVE DATA FROM PHP
                 if (dataSent)
-                    StartCoroutine(NetReceiveMessage($"id=123&side={playerSide}"));
+                    StartCoroutine(NetCheckFlag($"id=123"));
 
                 messageTimer = 0f;
                 
@@ -137,24 +137,19 @@ public class MessageManager : MonoBehaviour
             NetData data = NetManager.RetriveData(results, 'r');
 
             NetManager.ASSERT(data.sts);
-
-            if(data.flag == '2')
-            {
-                p2Message = data.debugText;
-                p2Text.text = p2Message;
-                dataSent = false;
-                StartCoroutine(ClearFlag($"id=123"));
-            }
-                
+            
+            p2Message = data.debugText;
+            p2Text.text = p2Message;
+            dataSent = false;
             
         }
 
         uwr.Dispose();
     }
 
-    IEnumerator ClearFlag(string path)
+    IEnumerator NetCheckFlag(string path)
     {
-        UnityWebRequest uwr = UnityWebRequest.Get($"{NetManager.clearFlag}{path}");
+        UnityWebRequest uwr = UnityWebRequest.Get($"{NetManager.checkFlag}{path}");
 
 
         yield return uwr.SendWebRequest();
@@ -167,16 +162,15 @@ public class MessageManager : MonoBehaviour
         else
         {
             string results = uwr.downloadHandler.text;
-            NetData data = NetManager.RetriveData(results, 'r');
+            NetData data = NetManager.RetriveData(results, 'f');
 
             NetManager.ASSERT(data.sts);
 
-            if(data.flag == '2')
+             if(data.flag == '2' || data.flag == '3')
             {
-                p2Message = data.debugText;
-                dataSent = false;
-            }
-                
+                StartCoroutine(NetReceiveMessage($"id=123&side={playerSide}"));
+
+            }   
             
         }
 

@@ -262,6 +262,7 @@ MonoBehaviour:
   p2Text: {fileID: 1183930729}
   p1Message: 
   p2Message: 
+  playerSide: 114
 --- !u!1 &1183930727
 GameObject:
   m_ObjectHideFlags: 0

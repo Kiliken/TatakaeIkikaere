@@ -12,7 +12,8 @@ public class MessageManager : MonoBehaviour
     private bool typing = false;
     public string p1Message;
     public string p2Message;
-    [SerializeField] int playerSide = 1;
+
+    [SerializeField] char playerSide = 'r';
     float messageTime = 3f;
     float messageTimer = 0f;
     private bool dataSent = false;
@@ -36,12 +37,13 @@ public class MessageManager : MonoBehaviour
             else
             {
                 // SEND DATA TO PHP
-                Debug.Log("Sent message: " + p1Message);
+                SendData();
                 // RECEIVE DATA FROM PHP
-                Debug.Log("Received message: " + p2Message);
-                p2Text.text = p2Message;
+                if (dataSent)
+                    StartCoroutine(NetReceiveMessage($"id=123&side={playerSide}"));
+
                 messageTimer = 0f;
-                dataSent = false;
+                
             }
         }
         
@@ -88,14 +90,13 @@ public class MessageManager : MonoBehaviour
         if(dataSent) return;
 
         p1Message = p1Text.text;
-        dataSent = true;
         Debug.Log("Sending data...");
-        StartCoroutine(DataFromWeb($"{NetManager.sendText}id=123&side={playerSide}&text={p1Message}"));
+        StartCoroutine(NetSendMessage($"id=123&side={playerSide}&text={p1Message}"));
     }
 
-    IEnumerator DataFromWeb(string path)
+    IEnumerator NetSendMessage(string path)
     {
-        UnityWebRequest uwr = UnityWebRequest.Get(path);
+        UnityWebRequest uwr = UnityWebRequest.Get($"{NetManager.sendText}{path}");
 
 
         yield return uwr.SendWebRequest();
@@ -108,10 +109,75 @@ public class MessageManager : MonoBehaviour
         else
         {
             string results = uwr.downloadHandler.text;
-            var data = JsonUtility.FromJson<JsonMessage>(results);
-            Debug.Log(results);
+            NetData data = NetManager.RetriveData(results, 's');
 
             NetManager.ASSERT(data.sts);
+
+            dataSent = true;
+        }
+
+        uwr.Dispose();
+    }
+
+    IEnumerator NetReceiveMessage(string path)
+    {
+        UnityWebRequest uwr = UnityWebRequest.Get($"{NetManager.receveText}{path}");
+
+
+        yield return uwr.SendWebRequest();
+
+        if (uwr.result != UnityWebRequest.Result.Success)
+        {
+            Debug.LogError("ERROR: File not found");
+            //RETURN TO MAIN MENU
+        }
+        else
+        {
+            string results = uwr.downloadHandler.text;
+            NetData data = NetManager.RetriveData(results, 'r');
+
+            NetManager.ASSERT(data.sts);
+
+            if(data.flag == '2')
+            {
+                p2Message = data.debugText;
+                p2Text.text = p2Message;
+                dataSent = false;
+                StartCoroutine(ClearFlag($"id=123"));
+            }
+                
+            
+        }
+
+        uwr.Dispose();
+    }
+
+    IEnumerator ClearFlag(string path)
+    {
+        UnityWebRequest uwr = UnityWebRequest.Get($"{NetManager.clearFlag}{path}");
+
+
+        yield return uwr.SendWebRequest();
+
+        if (uwr.result != UnityWebRequest.Result.Success)
+        {
+            Debug.LogError("ERROR: File not found");
+            //RETURN TO MAIN MENU
+        }
+        else
+        {
+            string results = uwr.downloadHandler.text;
+            NetData data = NetManager.RetriveData(results, 'r');
+
+            NetManager.ASSERT(data.sts);
+
+            if(data.flag == '2')
+            {
+                p2Message = data.debugText;
+                dataSent = false;
+            }
+                
+            
         }
 
         uwr.Dispose();

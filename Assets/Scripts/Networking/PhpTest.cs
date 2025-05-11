@@ -60,13 +60,13 @@ public class PhpTest : MonoBehaviour
         else
         {
             string results = uwr.downloadHandler.text;
-            var data = JsonUtility.FromJson<JsonMessage>(results);
+            //var data = JsonUtility.FromJson<JsonMessage>(results);
             Debug.Log(results);
 
-            NetManager.ASSERT(data.sts);
+            //NetManager.ASSERT(data.sts);
 
             //DO SOMETHING
-            _text.text = $"{data.RText}";
+            //_text.text = $"{data.RText}";
 
 
         }

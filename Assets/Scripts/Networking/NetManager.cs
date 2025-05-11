@@ -26,7 +26,7 @@ public static class NetManager {
 
     public static readonly string receveText = $"{SERVER}receveTest.php?";
 
-    public static readonly string clearFlag = $"{SERVER}clearFlag.php?";
+    public static readonly string checkFlag = $"{SERVER}checkFlag.php?";
 
 
     //SERVER ASSERT
@@ -46,16 +46,23 @@ public static class NetManager {
         switch(type) {
             case 's':
                 converter = str.ToCharArray(0,str.Length);
+                Debug.Log(str);
+
                 data.sts = converter[0];
                 break;
             case 'r':
                 converter = str.ToCharArray(0,str.Length);
+                Debug.Log(str);
+
+                data.sts = converter[0];
+                data.debugText = new string(converter, 1, converter.Length-1);
+                break;
+            case 'f':
+                converter = str.ToCharArray(0,str.Length);
+                Debug.Log(str);
+
                 data.sts = converter[0];
                 data.flag = converter[1];
-                if (data.flag != '2')
-                    break;
-
-                data.debugText = new string(converter, 2, 5);
                 break;
             default:
                 Debug.LogError("INVALID TYPE");

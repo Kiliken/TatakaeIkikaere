@@ -462,7 +462,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 208822947}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 208822949}
+        m_TargetAssemblyTypeName: AttackTypeButton, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &208822947
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -513,7 +525,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a01c0ed4023c6184fb6fc1acd2059f65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackType: 0
+  attackType: 2
 --- !u!1 &314608921
 GameObject:
   m_ObjectHideFlags: 0
@@ -728,7 +740,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 485965870}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 485965872}
+        m_TargetAssemblyTypeName: AttackTypeButton, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &485965870
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -779,7 +803,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a01c0ed4023c6184fb6fc1acd2059f65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackType: 0
+  attackType: 4
 --- !u!1 &494176400
 GameObject:
   m_ObjectHideFlags: 0
@@ -863,7 +887,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 494176403}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 494176405}
+        m_TargetAssemblyTypeName: AttackTypeButton, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &494176403
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -914,7 +950,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a01c0ed4023c6184fb6fc1acd2059f65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackType: 0
+  attackType: 3
 --- !u!224 &534390629 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3737385715872384171, guid: b81f70e67825fa646a86ba4992a5654e, type: 3}
@@ -1301,7 +1337,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1020643465}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1020643467}
+        m_TargetAssemblyTypeName: AttackTypeButton, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1020643465
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1352,7 +1400,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a01c0ed4023c6184fb6fc1acd2059f65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackType: 0
+  attackType: 1
 --- !u!1 &1056792241
 GameObject:
   m_ObjectHideFlags: 0

@@ -20,5 +20,6 @@ public class BackButton : MonoBehaviour
         notPressedObj.SetActive(false);
         yield return new WaitForSeconds(pressDuration);
         notPressedObj.SetActive(true);
+        GameController.Instance.UpdateAction();
     }
 }

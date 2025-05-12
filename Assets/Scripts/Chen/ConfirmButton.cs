@@ -13,6 +13,7 @@ public class ConfirmButton : MonoBehaviour
     {
         StartCoroutine(PressRoutine());
         GameController.Instance.executeCurrentAction();
+        GameController.Instance.UpdateAction();
     }
     
     private IEnumerator PressRoutine()

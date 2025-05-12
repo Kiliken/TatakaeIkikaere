@@ -93,7 +93,7 @@ public class GridButton : MonoBehaviour
             //attackImage.gameObject.SetActive(false);
 
         }
-        else if (AttackController.Instance.IsTileAttackPattern(gridPosition) && AttackController.Instance.center == gridPosition)
+        else if (AttackController.Instance.IsTileAttackPattern(gridPosition, AttackController.Instance.currentAttackType) && AttackController.Instance.center == gridPosition)
         {
             SetVisible(centerAttackAim);
             SetTransparent(attackAim);
@@ -101,7 +101,7 @@ public class GridButton : MonoBehaviour
 
 
         }
-        else if (AttackController.Instance.IsTileAttackPattern(gridPosition))
+        else if (AttackController.Instance.IsTileAttackPattern(gridPosition, AttackController.Instance.currentAttackType))
         {
             SetVisible(attackAim);
             SetTransparent(centerAttackAim);
@@ -131,7 +131,7 @@ public class GridButton : MonoBehaviour
         {
             aimLock();
         }
-
+        GameController.Instance.UpdateAction();
     }
 
     private void setDestination()
@@ -162,7 +162,7 @@ public class GridButton : MonoBehaviour
 
     public void executeAttack()
     {
-        if (AttackController.Instance.IsTileAttackPattern(gridPosition))
+        if (AttackController.Instance.IsTileAttackPattern(gridPosition, AttackController.Instance.currentAttackType))
         {
             SetTransparent(attackAim);
             SetTransparent(centerAttackAim);

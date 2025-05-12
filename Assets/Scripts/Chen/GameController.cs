@@ -27,6 +27,21 @@ public class GameController : MonoBehaviour
     [SerializeField] private GameObject backB;
     [SerializeField] private GameObject attackTypePanel;
 
+    private int player1maxHP;
+    private int player2maxHP;
+    private int player1curHP;
+    private int player2curHP;
+    private int player1Atk;
+    private int player2Atk;
+    private int player1Speed;
+    private int player2Speed;
+    private int player1AtkType;
+    private int player2AtkType;
+    private Vector2Int player1pos;
+    private Vector2Int player2pos;
+    private Vector2Int player1des;
+    private Vector2Int player2des; 
+
     private void Awake()
     {
         Instance = this;
@@ -60,12 +75,12 @@ public class GameController : MonoBehaviour
         }
 
         //playerButtons[1, 0].movePlayer();
-        
+        UpdateAction();
     }
 
 
-    // Update is called once per frame
-    void Update()
+    // Update is called after all actions
+    public void UpdateAction()
     {
         if (actionMode == 0)
         {
@@ -140,7 +155,7 @@ public class GameController : MonoBehaviour
             {
                 for (int y = 0; y < 3; y++)
                 {
-                    if (AttackController.Instance.IsTileAttackPattern(new Vector2Int(x , y)))
+                    if (AttackController.Instance.IsTileAttackPattern(new Vector2Int(x , y), AttackController.Instance.currentAttackType))
                     {
                         oppoButtons[x, y].gameObject.GetComponent<GridButton>().executeAttack();
                     }
@@ -201,4 +216,17 @@ public class GameController : MonoBehaviour
             }
         }
     }
+
+
+    public void InitiateCharacter(int playerNum, int maxHP, int atk, int spd) { 
+        if(playerNum == 1)
+        {
+            player1maxHP = maxHP;
+            player1curHP = maxHP;
+            player1Atk = atk;
+
+        }
+    
+    }
+
 }

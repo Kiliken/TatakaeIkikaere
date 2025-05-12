@@ -23,5 +23,6 @@ public class AttackTypeButton : MonoBehaviour
     {
         GameController.Instance.setActionAttackType(attackType);
         AttackController.Instance.hasCenter = true;
+        GameController.Instance.UpdateAction();
     }
 }

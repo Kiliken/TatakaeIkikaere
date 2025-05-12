@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class PlayerUser : Player
 {
+    void Awake()
+    {
+        // for checking the player script from the beginning
+        // if a player user script already exists (from the title scene), destroy this object.
+    }
+
+    
     // Start is called before the first frame update
     void Start()
     {

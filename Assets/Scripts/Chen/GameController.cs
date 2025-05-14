@@ -35,12 +35,13 @@ public class GameController : MonoBehaviour
     private int player2Atk;
     private int player1Speed;
     private int player2Speed;
-    private int player1AtkType;
-    private int player2AtkType;
     private Vector2Int player1pos;
     private Vector2Int player2pos;
     private Vector2Int player1des;
-    private Vector2Int player2des; 
+    private Vector2Int player2des;
+    private int[] player1AtkTypes;
+    private int[] player2AtkTypes;
+
 
     private void Awake()
     {
@@ -132,7 +133,7 @@ public class GameController : MonoBehaviour
 
     public void setActionAttackType(int attackType)
     {
-        actionMode = 2;
+        actionMode = 3;
         AttackController.Instance.currentAttackType = attackType;
     }
 
@@ -218,15 +219,36 @@ public class GameController : MonoBehaviour
     }
 
 
-    public void InitiateCharacter(int playerNum, int maxHP, int atk, int spd) { 
+    public void InitiateCharacter(int playerNum, int maxHP, int atk, int spd, int[] types) { 
         if(playerNum == 1)
         {
             player1maxHP = maxHP;
             player1curHP = maxHP;
             player1Atk = atk;
+            player1Speed = spd;
+            int index = 0;
+            foreach (int n in types)
+            {
+                player1AtkTypes[index] = n;
+                index++;
+            }
 
         }
-    
+        else if(playerNum == 2)
+        {
+            player2maxHP = maxHP;
+            player2curHP = maxHP;
+            player2Atk = atk;
+            player2Speed = spd;
+            int index = 0;
+            foreach (int n in types)
+            {
+                player1AtkTypes[index] = n;
+                index++;
+            }
+        }
+        
+
     }
 
 }

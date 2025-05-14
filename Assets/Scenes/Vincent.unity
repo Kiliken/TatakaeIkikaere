@@ -672,7 +672,7 @@ GameObject:
   - component: {fileID: 485965869}
   - component: {fileID: 485965872}
   m_Layer: 5
-  m_Name: Button4
+  m_Name: Button7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -804,7 +804,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a01c0ed4023c6184fb6fc1acd2059f65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackType: 4
+  attackType: 7
 --- !u!1 &494176400
 GameObject:
   m_ObjectHideFlags: 0
@@ -2296,7 +2296,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 4
+  m_text: 7
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

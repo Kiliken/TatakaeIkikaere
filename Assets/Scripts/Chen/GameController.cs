@@ -13,8 +13,7 @@ public class GameController : MonoBehaviour
     //the current executable action:
     //  no action :                 0
     //  move :                      1
-    //  attack type selected:       2 
-    //  attack location selected:   3
+    //  attack type selected:       2
     public int actionMode = 0;
 
     public Vector2Int moveDestination;

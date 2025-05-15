@@ -7,13 +7,13 @@ public class ConfirmButton : MonoBehaviour
 
     public GameObject notPressedObj;
 
-    public float pressDuration = 0.1f;
+    public float pressDuration = 1f;
 
     public void OnClick()
     {
         StartCoroutine(PressRoutine());
         GameController.Instance.executeCurrentAction();
-        GameController.Instance.UpdateAction();
+        //GameController.Instance.UpdateAction();
     }
     
     private IEnumerator PressRoutine()

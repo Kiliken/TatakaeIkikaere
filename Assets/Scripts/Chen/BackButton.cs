@@ -6,7 +6,7 @@ public class BackButton : MonoBehaviour
 {
     public GameObject notPressedObj;
 
-    public float pressDuration = 0.1f;
+    public float pressDuration = 0.5f;
 
 
     public void OnClick()

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class AttackTypeButton : MonoBehaviour
 {
 
-    private int attackType;
+    public int attackType;
     private Image buttonImage;
     private Sprite[] sprites;
     private int spriteIndex;
@@ -14,7 +14,7 @@ public class AttackTypeButton : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        buttonImage = GetComponent<Image>();
+        
        
 
     }
@@ -34,9 +34,14 @@ public class AttackTypeButton : MonoBehaviour
 
     public void SetAttackType(int t)
     {
+        buttonImage = GetComponent<Image>();
         attackType = t;
         spriteIndex = attackType - 1;
         sprites = Resources.LoadAll<Sprite>("Sprites/AttackTypeButtonSpritesheet");
+        //foreach (var s in sprites)
+        //{
+        //    Debug.Log("Loaded sprite: " + s.name);
+        //}
         buttonImage.sprite = sprites[spriteIndex];
     }
 }

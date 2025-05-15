@@ -55,10 +55,8 @@ public class GameController : MonoBehaviour
     void Start()
     {
         actionMode = 0;
-        int count = 0;
-        int[] array = { 1, 3, 4, 8 };
-        InitiateCharacter(1, 100, 100, 100, array);
 
+        int count = 0;
         for (int py = 0; py < 3; py++)
         {
             for (int px = 0; px < 3; px++)
@@ -78,6 +76,10 @@ public class GameController : MonoBehaviour
                 count++;
             }
         }
+
+        
+        int[] array = { 1, 3, 4, 7};
+        InitiateCharacter(1, 100, 100, 100, array);
 
         //playerButtons[1, 0].movePlayer();
         UpdateAction();

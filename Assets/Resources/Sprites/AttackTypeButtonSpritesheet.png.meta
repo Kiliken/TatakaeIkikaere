@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 0da3e30256b5c4c4b93851291ed22677
+guid: e4bb68ca34ef7dc479cee078f35b59cd
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -93,17 +93,95 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: VisionOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: tvOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: AimCenter_0
+      name: AttackTypeButtonSpritesheet_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 152
-        width: 152
-        height: 152
+        y: 336
+        width: 224
+        height: 168
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -111,20 +189,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9e496b3bd68a46747b60d2eccf197998
-      internalID: 735828191
+      spriteID: 6aabebe22175fd74c96597da798947ba
+      internalID: 710378503
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: AimCenter_1
+      name: AttackTypeButtonSpritesheet_1
       rect:
         serializedVersion: 2
-        x: 152
-        y: 152
-        width: 152
-        height: 152
+        x: 224
+        y: 336
+        width: 224
+        height: 168
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -132,20 +210,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7f2497b9d67aef242944e554adcd44fc
-      internalID: -1691304106
+      spriteID: be2d1792ab5194b47b9da3988d41674a
+      internalID: -545949578
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: AimCenter_2
+      name: AttackTypeButtonSpritesheet_2
       rect:
         serializedVersion: 2
-        x: 304
-        y: 152
-        width: 152
-        height: 152
+        x: 448
+        y: 336
+        width: 224
+        height: 168
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -153,20 +231,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 384296c9ef4d70740b1f1a1fb267beb1
-      internalID: -1880908262
+      spriteID: 30e488ad139c11f4588d4f5bb1b511ef
+      internalID: -1337589820
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: AimCenter_3
+      name: AttackTypeButtonSpritesheet_3
       rect:
         serializedVersion: 2
-        x: 456
-        y: 152
-        width: 152
-        height: 152
+        x: 0
+        y: 168
+        width: 224
+        height: 168
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -174,20 +252,62 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 77c12de4649b84a42bfeff5b4721c58e
-      internalID: -1961394069
+      spriteID: a9cef2f21c974254aa0ca2d5f79e5577
+      internalID: -93785146
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: AimCenter_4
+      name: AttackTypeButtonSpritesheet_4
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 168
+        width: 224
+        height: 168
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e07a01a36212ffa4c935f4614168648c
+      internalID: -666928824
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AttackTypeButtonSpritesheet_5
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 168
+        width: 224
+        height: 168
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f05de584c1d892a4e802af34a582dfa8
+      internalID: 361624291
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AttackTypeButtonSpritesheet_6
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 152
-        height: 152
+        width: 224
+        height: 168
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -195,20 +315,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 75383e502c6a19740a1139e4ac2276ad
-      internalID: -1612347397
+      spriteID: 8cffe2b6529738240970abbea39dbde9
+      internalID: -1235927841
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: AimCenter_5
+      name: AttackTypeButtonSpritesheet_7
       rect:
         serializedVersion: 2
-        x: 152
+        x: 224
         y: 0
-        width: 152
-        height: 152
+        width: 224
+        height: 168
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -216,20 +336,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6268248e35f9f0c4294f3abcb212fdff
-      internalID: 175966884
+      spriteID: 98753b3659b5302439da4d5cb57a2cca
+      internalID: 2129163660
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: AimCenter_6
+      name: AttackTypeButtonSpritesheet_8
       rect:
         serializedVersion: 2
-        x: 304
+        x: 448
         y: 0
-        width: 152
-        height: 152
+        width: 224
+        height: 168
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -237,29 +357,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c2b92db088585984b861e0d0beb5749c
-      internalID: 1629281672
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: AimCenter_7
-      rect:
-        serializedVersion: 2
-        x: 456
-        y: 0
-        width: 152
-        height: 152
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 65a6183a0ec28d84f9155cbd787d1db8
-      internalID: 1419672546
+      spriteID: 452c662a627e71841ae7d404707d15b6
+      internalID: -424771048
       vertices: []
       indices: 
       edges: []
@@ -275,14 +374,15 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      AimCenter_0: 735828191
-      AimCenter_1: -1691304106
-      AimCenter_2: -1880908262
-      AimCenter_3: -1961394069
-      AimCenter_4: -1612347397
-      AimCenter_5: 175966884
-      AimCenter_6: 1629281672
-      AimCenter_7: 1419672546
+      AttackTypeButtonSpritesheet_0: 710378503
+      AttackTypeButtonSpritesheet_1: -545949578
+      AttackTypeButtonSpritesheet_2: -1337589820
+      AttackTypeButtonSpritesheet_3: -93785146
+      AttackTypeButtonSpritesheet_4: -666928824
+      AttackTypeButtonSpritesheet_5: 361624291
+      AttackTypeButtonSpritesheet_6: -1235927841
+      AttackTypeButtonSpritesheet_7: 2129163660
+      AttackTypeButtonSpritesheet_8: -424771048
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

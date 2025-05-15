@@ -6,6 +6,7 @@ public class GameController : MonoBehaviour
 {
     [SerializeField] private GridButton[] playerGridButtons;
     [SerializeField] private GridButton[] opponentGridButtons;
+    [SerializeField] private AttackTypeButton[] attackTypeButtons;
 
     public static GameController Instance;
 
@@ -27,6 +28,9 @@ public class GameController : MonoBehaviour
     [SerializeField] private GameObject backB;
     [SerializeField] private GameObject attackTypePanel;
 
+
+    //player stats to be initialized through InitiateCharacter( player number, atk, hp, spd, types)
+    //player 1 is always the player on this end, and player 2 is always the opponent
     private int player1maxHP;
     private int player2maxHP;
     private int player1curHP;
@@ -52,8 +56,9 @@ public class GameController : MonoBehaviour
     void Start()
     {
         actionMode = 0;
-
         int count = 0;
+        int[] array = { 1, 3, 4, 8 };
+        InitiateCharacter(1, 100, 100, 100, array);
 
         for (int py = 0; py < 3; py++)
         {
@@ -227,10 +232,16 @@ public class GameController : MonoBehaviour
             player1Atk = atk;
             player1Speed = spd;
             int index = 0;
+            player1AtkTypes = new int[4];
             foreach (int n in types)
             {
                 player1AtkTypes[index] = n;
                 index++;
+            }
+
+            for(int i = 0; i < 4; i++)
+            {
+                attackTypeButtons[i].SetAttackType(player1AtkTypes[i]);
             }
 
         }

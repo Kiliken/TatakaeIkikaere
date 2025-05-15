@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: f626e0bfe8df4ee4c86d4849718ff26f
+guid: 0da3e30256b5c4c4b93851291ed22677
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -93,11 +93,89 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: VisionOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: tvOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Aim_0
+      name: AimCenter_0
       rect:
         serializedVersion: 2
         x: 0
@@ -111,14 +189,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1995aeb128de8d44d97381dff2b003d0
-      internalID: -1569353639
+      spriteID: 9e496b3bd68a46747b60d2eccf197998
+      internalID: 735828191
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Aim_1
+      name: AimCenter_1
       rect:
         serializedVersion: 2
         x: 152
@@ -132,14 +210,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 64e2e355c4763524faf2054e8345b5b1
-      internalID: 2140879689
+      spriteID: 7f2497b9d67aef242944e554adcd44fc
+      internalID: -1691304106
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Aim_2
+      name: AimCenter_2
       rect:
         serializedVersion: 2
         x: 304
@@ -153,14 +231,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 910e4f6d55041d141a63b6af1bfdab78
-      internalID: 1177930508
+      spriteID: 384296c9ef4d70740b1f1a1fb267beb1
+      internalID: -1880908262
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Aim_3
+      name: AimCenter_3
       rect:
         serializedVersion: 2
         x: 456
@@ -174,14 +252,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9559302bd9a3f7843a12140ab46f248a
-      internalID: -740296556
+      spriteID: 77c12de4649b84a42bfeff5b4721c58e
+      internalID: -1961394069
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Aim_4
+      name: AimCenter_4
       rect:
         serializedVersion: 2
         x: 0
@@ -195,14 +273,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a62c8f62c5131964a915a3eaec47d15f
-      internalID: 1205098818
+      spriteID: 75383e502c6a19740a1139e4ac2276ad
+      internalID: -1612347397
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Aim_5
+      name: AimCenter_5
       rect:
         serializedVersion: 2
         x: 152
@@ -216,14 +294,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: beca841e8e0bb8a4ba37031423720a85
-      internalID: -1270349566
+      spriteID: 6268248e35f9f0c4294f3abcb212fdff
+      internalID: 175966884
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Aim_6
+      name: AimCenter_6
       rect:
         serializedVersion: 2
         x: 304
@@ -237,14 +315,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5cc91bf28a3142744baf83b865be20eb
-      internalID: -997810821
+      spriteID: c2b92db088585984b861e0d0beb5749c
+      internalID: 1629281672
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Aim_7
+      name: AimCenter_7
       rect:
         serializedVersion: 2
         x: 456
@@ -258,8 +336,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 942a11c213b6afa4d86c41d29562f435
-      internalID: -473745220
+      spriteID: 65a6183a0ec28d84f9155cbd787d1db8
+      internalID: 1419672546
       vertices: []
       indices: 
       edges: []
@@ -275,14 +353,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Aim_0: -1569353639
-      Aim_1: 2140879689
-      Aim_2: 1177930508
-      Aim_3: -740296556
-      Aim_4: 1205098818
-      Aim_5: -1270349566
-      Aim_6: -997810821
-      Aim_7: -473745220
+      AimCenter_0: 735828191
+      AimCenter_1: -1691304106
+      AimCenter_2: -1880908262
+      AimCenter_3: -1961394069
+      AimCenter_4: -1612347397
+      AimCenter_5: 175966884
+      AimCenter_6: 1629281672
+      AimCenter_7: 1419672546
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -1551,6 +1551,24 @@ MonoBehaviour:
   confirmB: {fileID: 1635587710}
   backB: {fileID: 1308949718}
   attackTypePanel: {fileID: 42406634}
+  player1maxHP: 0
+  player2maxHP: 0
+  player1curHP: 0
+  player2curHP: 0
+  player1Atk: 0
+  player2Atk: 0
+  player1Speed: 0
+  player2Speed: 0
+  player1pos: {x: 0, y: 0}
+  player2pos: {x: 0, y: 0}
+  player1des: {x: 0, y: 0}
+  player2des: {x: 0, y: 0}
+  player1AtkTypes: 
+  player2AtkTypes: 
+  player1CurAtkType: 0
+  player1Center: {x: 0, y: 0}
+  player2Center: {x: 0, y: 0}
+  player2CurAtkType: 0
 --- !u!4 &1448757080
 Transform:
   m_ObjectHideFlags: 0

@@ -31,22 +31,22 @@ public class GameController : MonoBehaviour
 
     //player stats to be initialized through InitiateCharacter( player number, atk, hp, spd, types)
     //player 1 is always the player on this end, and player 2 is always the opponent
-    private int player1maxHP;
-    private int player2maxHP;
-    private int player1curHP;
-    private int player2curHP;
-    private int player1Atk;
-    private int player2Atk;
-    private int player1Speed;
-    private int player2Speed;
-    private Vector2Int player1pos;
-    private Vector2Int player2pos;
-    private Vector2Int player1des;
-    private Vector2Int player2des;
-    private int[] player1AtkTypes;
-    private int[] player2AtkTypes;
-    private int player1CurAtkType;
-    private int player2CurAtkType;
+    public int player1maxHP;
+    public int player2maxHP;
+    public int player1curHP;
+    public int player2curHP;
+    public int player1Atk;
+    public int player2Atk;
+    public int player1Speed;
+    public int player2Speed;
+    public Vector2Int player1pos;
+    public Vector2Int player2pos;
+    public Vector2Int player1des;
+    public Vector2Int player2des;
+    public int[] player1AtkTypes;
+    public int[] player2AtkTypes;
+    public int player1CurAtkType;
+    public int player2CurAtkType;
     
     // move : true / attack : false
     private bool player2CurMove;
@@ -87,7 +87,7 @@ public class GameController : MonoBehaviour
         int[] array = { 1, 3, 4, 7};
         InitiateCharacter(1, 100, 100, 100, array);
         player2des = new Vector2Int(2, 1);
-        player2CurMove = true;
+        player2CurMove = false;
 
         //playerButtons[1, 0].movePlayer();
         UpdateAction();

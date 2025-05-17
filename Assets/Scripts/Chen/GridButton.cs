@@ -80,6 +80,11 @@ public class GridButton : MonoBehaviour
                 SetTransparent(destination);
             }
         }
+        else if (GameController.Instance.actionMode == 3)
+        {
+            SetTransparent(panelImage);
+            SetTransparent(destination);
+        }
 
 
     }
@@ -148,11 +153,19 @@ public class GridButton : MonoBehaviour
         FindObjectOfType<Ghost>().MoveTo(worldPos, gridPosition);
     }
 
+    public void moveEnemy()
+    {
+        Vector3 worldPos = transform.position;
+        worldPos.z = 0f;
+
+        FindObjectOfType<EnemyGhost>().MoveTo(worldPos, gridPosition);
+    }
+
     private void aimLock()
     {
         AttackController.Instance.hasCenter = true;
         AttackController.Instance.center = gridPosition;
-        GameController.Instance.actionMode = 3;
+        GameController.Instance.actionMode = 2;
     }
 
     private void cancelAim()
@@ -162,18 +175,37 @@ public class GridButton : MonoBehaviour
 
     public void executeAttack()
     {
-        if (AttackController.Instance.IsTileAttackPattern(gridPosition, AttackController.Instance.currentAttackType))
+        if(GameController.Instance.actionMode == 2)
         {
-            SetTransparent(attackAim);
-            SetTransparent(centerAttackAim);
-            attackImage.gameObject.SetActive(true);
-            SetVisible(attackImage);
-            
-        } 
-        else
+            if (AttackController.Instance.IsTileAttackPattern(gridPosition, AttackController.Instance.currentAttackType))
+            {
+                SetTransparent(attackAim);
+                SetTransparent(centerAttackAim);
+                attackImage.gameObject.SetActive(true);
+                SetVisible(attackImage);
+
+            }
+            else
+            {
+                SetTransparent(attackAim);
+                SetTransparent(centerAttackAim);
+            }
+        }
+        else if (GameController.Instance.actionMode == 3)
         {
-            SetTransparent(attackAim);
-            SetTransparent(centerAttackAim);
+            if (AttackController.Instance.IsTileAttackPatternOppo(gridPosition, AttackController.Instance.p2attackType, AttackController.Instance.p2center))
+            {
+                SetTransparent(attackAim);
+                SetTransparent(centerAttackAim);
+                attackImage.gameObject.SetActive(true);
+                SetVisible(attackImage);
+
+            }
+            else
+            {
+                SetTransparent(attackAim);
+                SetTransparent(centerAttackAim);
+            }
         }
 
     }

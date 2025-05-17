@@ -2880,7 +2880,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3737385715872384171, guid: b81f70e67825fa646a86ba4992a5654e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.0153
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 3737385715872384171, guid: b81f70e67825fa646a86ba4992a5654e, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2941,6 +2941,26 @@ PrefabInstance:
     - target: {fileID: 4261408906707360788, guid: b81f70e67825fa646a86ba4992a5654e, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5279121380780846145, guid: b81f70e67825fa646a86ba4992a5654e, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5279121380780846145, guid: b81f70e67825fa646a86ba4992a5654e, type: 3}
+      propertyPath: m_Color.g
+      value: 0.48627448
+      objectReference: {fileID: 0}
+    - target: {fileID: 5279121380780846145, guid: b81f70e67825fa646a86ba4992a5654e, type: 3}
+      propertyPath: m_Color.r
+      value: 0.987355
+      objectReference: {fileID: 0}
+    - target: {fileID: 5279121380780846145, guid: b81f70e67825fa646a86ba4992a5654e, type: 3}
+      propertyPath: m_Maskable
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5279121380780846145, guid: b81f70e67825fa646a86ba4992a5654e, type: 3}
+      propertyPath: m_Material
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 5856570355858213164, guid: b81f70e67825fa646a86ba4992a5654e, type: 3}
       propertyPath: m_AnchorMax.y

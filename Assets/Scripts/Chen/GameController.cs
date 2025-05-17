@@ -11,9 +11,10 @@ public class GameController : MonoBehaviour
     public static GameController Instance;
 
     //the current executable action:
-    //  no action :                 0
-    //  move :                      1
-    //  attack type selected:       2
+    //  no action :                     0
+    //  move :                          1
+    //  attack type selected:           2
+    //  player attacked, emeny attack   3
     public int actionMode = 0;
 
     public Vector2Int moveDestination;
@@ -44,6 +45,11 @@ public class GameController : MonoBehaviour
     private Vector2Int player2des;
     private int[] player1AtkTypes;
     private int[] player2AtkTypes;
+    private int player1CurAtkType;
+    private int player2CurAtkType;
+    
+    // move : true / attack : false
+    private bool player2CurMove;
 
 
     private void Awake()
@@ -80,6 +86,8 @@ public class GameController : MonoBehaviour
         
         int[] array = { 1, 3, 4, 7};
         InitiateCharacter(1, 100, 100, 100, array);
+        player2des = new Vector2Int(2, 1);
+        player2CurMove = true;
 
         //playerButtons[1, 0].movePlayer();
         UpdateAction();
@@ -110,22 +118,22 @@ public class GameController : MonoBehaviour
         }
         else if (actionMode == 2)
         {
-            confirmB.SetActive(false);
-            confirmB.GetComponent<ConfirmButton>().notPressedObj.SetActive(false);
-            backB.SetActive(false);
-            backB.GetComponent<BackButton>().notPressedObj.SetActive(false);
-            setPlayerButtonsActive(false);
-            setOpponentButtonsActive(true);
-            attackTypePanel.SetActive(true);
-        }
-        else if (actionMode == 3)
-        {
             confirmB.SetActive(true);
             confirmB.GetComponent<ConfirmButton>().notPressedObj.SetActive(true);
             backB.SetActive(true);
             backB.GetComponent<BackButton>().notPressedObj.SetActive(true);
             setPlayerButtonsActive(false);
             setOpponentButtonsActive(true);
+            attackTypePanel.SetActive(false);
+        }
+        else if (actionMode == 3)
+        {
+            confirmB.SetActive(false);
+            confirmB.GetComponent<ConfirmButton>().notPressedObj.SetActive(false);
+            backB.SetActive(false);
+            backB.GetComponent<BackButton>().notPressedObj.SetActive(false);
+            setPlayerButtonsActive(!player2CurMove);
+            setOpponentButtonsActive(player2CurMove);
             attackTypePanel.SetActive(false);
         }
     }
@@ -139,13 +147,13 @@ public class GameController : MonoBehaviour
 
     public void setActionAttackType(int attackType)
     {
-        actionMode = 3;
+        actionMode = 2;
         AttackController.Instance.currentAttackType = attackType;
     }
 
     public void setActionAttackLocation(Vector2Int center)
     {
-        actionMode = 3;
+        actionMode = 2;
     }
 
     public void executeCurrentAction()
@@ -153,9 +161,9 @@ public class GameController : MonoBehaviour
         if(actionMode == 1)
         {
             playerButtons[moveDestination.x, moveDestination.y].movePlayer();
-            actionMode = 0;
+            resetMode();
         } 
-        else if (actionMode == 3)
+        else if (actionMode == 2)
         {
             
             for (int x = 0; x < 3; x++)
@@ -165,6 +173,7 @@ public class GameController : MonoBehaviour
                     if (AttackController.Instance.IsTileAttackPattern(new Vector2Int(x , y), AttackController.Instance.currentAttackType))
                     {
                         oppoButtons[x, y].gameObject.GetComponent<GridButton>().executeAttack();
+                        Debug.Log("executed attack at " + x + "," + y);
                     }
                         
                         
@@ -174,6 +183,26 @@ public class GameController : MonoBehaviour
 
             AttackController.Instance.ExecuteAttack();
 
+        }
+        else if (actionMode == 3)
+        {
+
+            if (player2CurMove)
+            {
+                oppoButtons[player2des.x, player2des.y].moveEnemy();
+                resetMode();
+            }
+            else if (!player2CurMove)
+            {
+                for (int x = 0; x < 3; x++)
+                {
+                    for (int y = 0; y < 3; y++)
+                    {
+                        playerButtons[x, y].gameObject.GetComponent<GridButton>().executeAttack();
+                    }
+                }
+            }
+            
         }
         
         
@@ -188,10 +217,36 @@ public class GameController : MonoBehaviour
             for (int py = 0; py < 3; py++)
             {
                 oppoButtons[px, py].gameObject.transform.Find("AttackImage").gameObject.SetActive(false);
+                
             }
         }
         setOpponentButtonsActive(false);
-        actionMode = 0;
+
+        if (actionMode == 3)
+        {
+            for (int px = 0; px < 3; px++)
+            {
+                for (int py = 0; py < 3; py++)
+                {
+                    playerButtons[px, py].gameObject.transform.Find("AttackImage").gameObject.SetActive(false);
+
+                }
+            }
+
+
+            actionMode = 0;
+            UpdateAction();
+
+        }
+        else if (actionMode == 1 || actionMode == 2)
+        {
+            actionMode = 3;
+            UpdateAction();
+            executeCurrentAction();
+            
+
+        }
+        
 
     }
     public void back()

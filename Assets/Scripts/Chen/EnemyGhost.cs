@@ -6,15 +6,25 @@ public class EnemyGhost : MonoBehaviour
 {
 
     public Vector2Int gridPosition;
-    // Start is called before the first frame update
+
     void Start()
     {
-        Vector2Int gridPosition = new Vector2Int(1, 1);
+        gridPosition = new Vector2Int(1, 1); // Starting grid tile
     }
 
-    // Update is called once per frame
-    void Update()
+    public void MoveTo(Vector3 worldTarget, Vector2Int newGridPos)
     {
-        
+        if (IsValidPosition(gridPosition, newGridPos))
+        {
+            transform.position = new Vector3(worldTarget.x, worldTarget.y, transform.position.z);
+
+            gridPosition = newGridPos;
+        }
+    }
+
+
+    private bool IsValidPosition(Vector2Int prevPos, Vector2Int newPos)
+    {
+        return Vector2Int.Distance(prevPos, newPos) <= 1f;
     }
 }

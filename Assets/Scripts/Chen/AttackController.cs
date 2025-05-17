@@ -10,7 +10,7 @@ public class AttackController : MonoBehaviour
     public bool hasCenter = false;
     public Vector2Int center = new Vector2Int(1,1);
     public int p2attackType = 1;
-    public bool p2hasCenter = false;
+    public bool p2hasCenter = true;
     public Vector2Int p2center = new Vector2Int(1, 1);
 
     private void Awake()
@@ -73,6 +73,16 @@ public class AttackController : MonoBehaviour
         }
 
 
+    }
+
+    public bool IsTileAttackPatternOppo(Vector2Int checkPos, int atkType, Vector2Int center)
+    {
+        Vector2Int tempC = center;
+        center = p2center;
+
+        bool ret = IsTileAttackPattern(checkPos, atkType);
+        center = tempC;
+        return ret;
     }
 
 

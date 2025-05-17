@@ -75,9 +75,10 @@ public class AttackController : MonoBehaviour
 
     }
 
-    public bool IsTileAttackPatternOppo(Vector2Int checkPos, int atkType, Vector2Int center)
+    public bool IsTileAttackPatternOppo(Vector2Int checkPos, int atkType)
     {
         Vector2Int tempC = center;
+
         center = p2center;
 
         bool ret = IsTileAttackPattern(checkPos, atkType);

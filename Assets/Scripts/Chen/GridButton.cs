@@ -16,9 +16,12 @@ public class GridButton : MonoBehaviour
     public bool isAttackButton;
     public bool aimed;
     public bool isCenter;
+    private Vector3 worldPos;
 
     private void Start()
     {
+
+        
 
         panelImage = transform.Find("Panel").GetComponent<Image>();
         SetTransparent(panelImage);
@@ -147,7 +150,7 @@ public class GridButton : MonoBehaviour
 
     public void movePlayer()
     {
-        Vector3 worldPos = transform.position;
+        worldPos = transform.position;
         worldPos.z = 0f;
 
         FindObjectOfType<Ghost>().MoveTo(worldPos, gridPosition);
@@ -155,9 +158,12 @@ public class GridButton : MonoBehaviour
 
     public void moveEnemy()
     {
-        Vector3 worldPos = transform.position;
+        //GameController.Instance.UpdateAction();
+        
+        worldPos = transform.position;
         worldPos.z = 0f;
-
+        Debug.Log("enemy moved to " + gridPosition.x + "," + gridPosition.y);
+        Debug.Log("enemy moved to worldpos: " + worldPos.x + "," + worldPos.y);
         FindObjectOfType<EnemyGhost>().MoveTo(worldPos, gridPosition);
     }
 
@@ -193,7 +199,7 @@ public class GridButton : MonoBehaviour
         }
         else if (GameController.Instance.actionMode == 3)
         {
-            if (AttackController.Instance.IsTileAttackPatternOppo(gridPosition, AttackController.Instance.p2attackType, AttackController.Instance.p2center))
+            if (AttackController.Instance.IsTileAttackPatternOppo(gridPosition, AttackController.Instance.p2attackType))
             {
                 SetTransparent(attackAim);
                 SetTransparent(centerAttackAim);

@@ -46,6 +46,8 @@ public class GameController : MonoBehaviour
     public int[] player1AtkTypes;
     public int[] player2AtkTypes;
     public int player1CurAtkType;
+    public Vector2Int player1Center;
+    public Vector2Int player2Center;
     public int player2CurAtkType;
     
     // move : true / attack : false
@@ -55,6 +57,8 @@ public class GameController : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        int[] array = { 1, 3, 4, 7 };
+        InitiateCharacter(1, 100, 100, 100, array);
     }
 
     // Start is called before the first frame update
@@ -84,11 +88,15 @@ public class GameController : MonoBehaviour
         }
 
         
-        int[] array = { 1, 3, 4, 7};
-        InitiateCharacter(1, 100, 100, 100, array);
+        
         player2des = new Vector2Int(2, 1);
-        player2CurMove = false;
-
+        player2Center = new Vector2Int(2, 2);
+        player2CurMove = true;
+        confirmB.SetActive(true);
+        backB.SetActive(true);
+        setPlayerButtonsActive(true);
+        setOpponentButtonsActive(true);
+        oppoButtons[2,2].moveEnemy();
         //playerButtons[1, 0].movePlayer();
         UpdateAction();
     }
@@ -97,8 +105,11 @@ public class GameController : MonoBehaviour
     // Update is called after all actions
     public void UpdateAction()
     {
+        Debug.Log("update action");
         if (actionMode == 0)
         {
+            
+
             confirmB.SetActive(false);
             backB.SetActive(false);
             setPlayerButtonsActive(true);
@@ -113,7 +124,7 @@ public class GameController : MonoBehaviour
             backB.SetActive(true);
             backB.GetComponent<BackButton>().notPressedObj.SetActive(true);
             setPlayerButtonsActive(true);
-            setOpponentButtonsActive(false);
+            setOpponentButtonsActive(player2CurMove);
             attackTypePanel.SetActive(false);
         }
         else if (actionMode == 2)
@@ -189,11 +200,13 @@ public class GameController : MonoBehaviour
 
             if (player2CurMove)
             {
+                setOpponentButtonsActive(true);
                 oppoButtons[player2des.x, player2des.y].moveEnemy();
                 resetMode();
             }
             else if (!player2CurMove)
             {
+                AttackController.Instance.p2center = player2Center;
                 for (int x = 0; x < 3; x++)
                 {
                     for (int y = 0; y < 3; y++)
@@ -220,7 +233,7 @@ public class GameController : MonoBehaviour
                 
             }
         }
-        setOpponentButtonsActive(false);
+        //setOpponentButtonsActive(false);
 
         if (actionMode == 3)
         {
@@ -277,6 +290,7 @@ public class GameController : MonoBehaviour
                 oppoButtons[px, py].gameObject.SetActive(state);
             }
         }
+        Debug.Log("oppo buttons set active: " + state);
     }
 
 

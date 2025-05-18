@@ -6,11 +6,12 @@ public class AttackImage : MonoBehaviour
 {
     public void resetMode()
     {
-        GameController.Instance.resetMode();
-        //this.gameObject.SetActive(false );
-        AttackController.Instance.center = new Vector2Int(1,1);
-        AttackController.Instance.hasCenter = false;
-        GameController.Instance.UpdateAction();
+        //GameController.Instance.executeCurrentAction();
+        Debug.Log("animation completed");
+        GameController.Instance.animationComplete = true;
+
+        
     }
+
 
 }

@@ -106,7 +106,7 @@ AnimationClip:
   - time: 1.1666666
     functionName: resetMode
     data: 
-    objectReferenceParameter: {fileID: 11500000, guid: 16fa445867ab8634fb24ae6fe56d5fed, type: 3}
+    objectReferenceParameter: {fileID: 11500000, guid: 8d1c459813d466c4ca7e2bb444475d3c, type: 3}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0

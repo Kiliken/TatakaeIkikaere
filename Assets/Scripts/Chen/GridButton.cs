@@ -17,23 +17,30 @@ public class GridButton : MonoBehaviour
     public bool aimed;
     public bool isCenter;
     private Vector3 worldPos;
+    
+    //private Animator animator;
 
     private void Start()
     {
 
-        
 
         panelImage = transform.Find("Panel").GetComponent<Image>();
+        if (panelImage == null) Debug.LogError("Panel image not found in " + gameObject.name);
         SetTransparent(panelImage);
         destination = transform.Find("DestinationPointer").GetComponent<Image>();
+        if (destination == null) Debug.LogError("Destination not found in " + gameObject.name);
         SetTransparent(destination);
         attackAim = transform.Find("AttackAim").GetComponent<Image>();
+        if (attackAim == null) Debug.LogError("AttackAim not found in " + gameObject.name);
         SetTransparent(attackAim);
         centerAttackAim = transform.Find("AttackAimCenter").GetComponent<Image>();
+        if (centerAttackAim == null) Debug.LogError("centerAtkAim not found in " + gameObject.name);
         SetTransparent(centerAttackAim);
 
 
         attackImage = transform.Find("AttackImage").GetComponent<Image>();
+
+        //animator = attackImage.GetComponent<Animator>();
         SetTransparent(attackImage);
         attackImage.gameObject.SetActive(false);
     }
@@ -67,7 +74,7 @@ public class GridButton : MonoBehaviour
         }
         else if (GameController.Instance.actionMode == 1)
         {
-            if (GameController.Instance.moveDestination == gridPosition)
+            if (GameController.Instance.player1des == gridPosition)
             {
                 SetVisible(destination);
                 SetTransparent(panelImage);
@@ -179,15 +186,50 @@ public class GridButton : MonoBehaviour
         AttackController.Instance.hasCenter = false;
     }
 
+    //public void executeAttack()
+    //{
+    //    if (GameController.Instance.actionMode == 2)
+    //    {
+    //        if (AttackController.Instance.IsTileAttackPattern(gridPosition, AttackController.Instance.currentAttackType))
+    //        {
+    //            SetVisible(attackImage);
+    //            animator.ResetTrigger("Attack"); // optional safety
+    //            animator.SetTrigger("Attack");
+
+    //            Debug.Log("Triggered attack animation on " + gameObject.name);
+
+    //        }
+
+
+    //    }
+    //    else if (GameController.Instance.actionMode == 3)
+    //    {
+    //        if (AttackController.Instance.IsTileAttackPatternOppo(gridPosition, AttackController.Instance.p2attackType))
+    //        {
+    //            SetVisible(attackImage);
+    //            animator.ResetTrigger("Attack"); // optional safety
+    //            animator.SetTrigger("Attack");
+
+    //            Debug.Log("Triggered attack animation on " + gameObject.name);
+    //        }
+
+
+    //    }
+    //}
+
+
     public void executeAttack()
     {
-        if(GameController.Instance.actionMode == 2)
+        if (GameController.Instance.actionMode == 2)
         {
             if (AttackController.Instance.IsTileAttackPattern(gridPosition, AttackController.Instance.currentAttackType))
             {
                 SetTransparent(attackAim);
                 SetTransparent(centerAttackAim);
+                Debug.Log("Enabling attackImage on: " + gameObject.name);
                 attackImage.gameObject.SetActive(true);
+                Debug.Log("attackImage active? " + attackImage.gameObject.activeSelf);
+                attackImage.GetComponent<Animator>().Play("AttackAnim", 0, 0f);
                 SetVisible(attackImage);
 
             }
@@ -204,6 +246,7 @@ public class GridButton : MonoBehaviour
                 SetTransparent(attackAim);
                 SetTransparent(centerAttackAim);
                 attackImage.gameObject.SetActive(true);
+                attackImage.GetComponent<Animator>().Play("AttackAnim", 0, 0f);
                 SetVisible(attackImage);
 
             }
@@ -222,6 +265,11 @@ public class GridButton : MonoBehaviour
 
     private void SetVisible(Image img)
     {
+        if (img == null)
+        {
+            Debug.LogWarning("SetVisible called with null image on " + gameObject.name);
+            return;
+        }
         Color color = img.color;
         color.a =  1f;
         img.color = color;
@@ -229,6 +277,11 @@ public class GridButton : MonoBehaviour
 
     private void SetTransparent(Image img)
     {
+        if (img == null)
+        {
+            Debug.LogWarning("SetTransparent called with null image on " + gameObject.name);
+            return;
+        }
         Color color = img.color;
         color.a = 0f;
         img.color = color;

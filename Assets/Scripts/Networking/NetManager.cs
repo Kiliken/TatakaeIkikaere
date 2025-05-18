@@ -113,11 +113,11 @@ public static class NetManager
                 Debug.Log(str);
 
                 data.sts = converter[0];
-                data.p2Pos.x = int.Parse(new string(converter, 1, 1));
-                data.p2Pos.y = int.Parse(new string(converter, 2, 1));
-                data.p2UsedAtk = int.Parse(new string(converter, 3, 1));
-                data.p2AtkCenter.x = int.Parse(new string(converter, 4, 1));
-                data.p2AtkCenter.y = int.Parse(new string(converter, 5, 1));
+                data.p2Pos.x = int.Parse(new string(converter, 2, 1));
+                data.p2Pos.y = int.Parse(new string(converter, 5, 1));
+                data.p2UsedAtk = int.Parse(new string(converter, 7, 1));
+                data.p2AtkCenter.x = int.Parse(new string(converter, 9, 1));
+                data.p2AtkCenter.y = int.Parse(new string(converter, 12, 1));
                 break;
             case 'f':
                 converter = str.ToCharArray(0, str.Length);

@@ -17,6 +17,7 @@ public class DataComTest : MonoBehaviour
     bool firstData = true;
     float refreshTime = 3f;
     float refreshTimer = 0f;
+    bool dataSent = false;
 
     [Space(12)]
     [SerializeField] char playerSide; //Your Side
@@ -33,19 +34,27 @@ public class DataComTest : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(refreshTimer < refreshTime)
+        if (Input.GetKeyDown(KeyCode.N) && !dataSent)
         {
-            refreshTimer += Time.deltaTime;
+            StartCoroutine(SendNormalData($"id=123&side={playerSide}&hp={gameController.player1curHP}&pos={gameController.player1pos}&usedAtk={gameController.player1CurAtkType}&atkCtr={gameController.player1Center}"));
+
         }
-        else
+
+        if (dataSent)
         {
-            if (firstData)
+            if (refreshTimer < refreshTime)
+            {
+                refreshTimer += Time.deltaTime;
+            }
+            else
             {
                 StartCoroutine(NetCheckFlag($"id=123"));
+
+                refreshTimer = 0f;
             }
-            refreshTimer = 0f;
         }
-        
+
+
     }
 
 
@@ -96,7 +105,7 @@ public class DataComTest : MonoBehaviour
 
     IEnumerator RetreiveInitialData(string path)
     {
-        
+
 
 
         UnityWebRequest uwr = UnityWebRequest.Get($"{NetManager.getGameStart}{path}");
@@ -110,7 +119,7 @@ public class DataComTest : MonoBehaviour
         }
         else
         {
-            
+
 
             if (firstData)
             {
@@ -124,8 +133,9 @@ public class DataComTest : MonoBehaviour
                 gameController.player2Speed = data.p2Spd;
 
                 firstData = false;
+                dataSent = false;
             }
-            
+
         }
 
         uwr.Dispose();
@@ -152,8 +162,15 @@ public class DataComTest : MonoBehaviour
 
             if (data.flag == '2' || data.flag == '3')
             {
-                //if first initial
-                StartCoroutine(RetreiveInitialData($"id=123&side={playerSide}"));
+                if (firstData)
+                {
+                    StartCoroutine(RetreiveInitialData($"id=123&side={playerSide}"));
+                }
+                else
+                {
+                    StartCoroutine(RetreiveNormalData($"id=123&side={playerSide}"));
+                }
+
 
                 //if not normal
 
@@ -183,8 +200,65 @@ public class DataComTest : MonoBehaviour
 
             NetManager.ASSERT(data.sts);
 
+            dataSent = true;
+
         }
 
         uwr.Dispose();
     }
+
+    IEnumerator SendNormalData(string path)
+    {
+        UnityWebRequest uwr = UnityWebRequest.Get($"{NetManager.sendData}{path}");
+
+
+        yield return uwr.SendWebRequest();
+
+        if (uwr.result != UnityWebRequest.Result.Success)
+        {
+            Debug.LogError("ERROR: File not found");
+            //RETURN TO MAIN MENU
+        }
+        else
+        {
+            string results = uwr.downloadHandler.text;
+            NetData data = NetManager.RetriveData(results, 's');
+
+            NetManager.ASSERT(data.sts);
+
+            dataSent = true;
+        }
+
+        uwr.Dispose();
+    }
+    
+    IEnumerator RetreiveNormalData(string path)
+   {
+       UnityWebRequest uwr = UnityWebRequest.Get($"{NetManager.getData}{path}");
+
+
+       yield return uwr.SendWebRequest();
+
+       if (uwr.result != UnityWebRequest.Result.Success)
+       {
+           Debug.LogError("ERROR: File not found");
+           //RETURN TO MAIN MENU
+       }
+       else
+       {
+           string results = uwr.downloadHandler.text;
+           NetData data = NetManager.RetriveData(results, 'r');
+
+           NetManager.ASSERT(data.sts);
+            
+            gameController.player2pos = data.p2Pos;
+            gameController.player2CurAtkType = data.p2UsedAtk;
+            gameController.player2Center = data.p2AtkCenter;
+
+            dataSent = false;
+            
+       }
+
+       uwr.Dispose();
+   }
 }

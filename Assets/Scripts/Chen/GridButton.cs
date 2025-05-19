@@ -67,7 +67,7 @@ public class GridButton : MonoBehaviour
         }
         else if (GameController.Instance.actionMode == 1)
         {
-            if (GameController.Instance.moveDestination == gridPosition)
+            if (GameController.Instance.player1des == gridPosition)
             {
                 SetVisible(destination);
                 SetTransparent(panelImage);

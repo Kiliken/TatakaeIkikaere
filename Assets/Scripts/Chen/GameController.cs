@@ -17,7 +17,7 @@ public class GameController : MonoBehaviour
     //  player attacked, emeny attack   3
     public int actionMode = 0;
 
-    public Vector2Int moveDestination;
+
 
     private Vector2Int attackCenter;
     private int attackType;
@@ -153,7 +153,7 @@ public class GameController : MonoBehaviour
     public void setActionMove(Vector2Int destination)
     {
         actionMode = 1;
-        moveDestination = destination; 
+        player1des = destination; 
     }
 
     public void setActionAttackType(int attackType)
@@ -171,7 +171,7 @@ public class GameController : MonoBehaviour
     {
         if(actionMode == 1)
         {
-            playerButtons[moveDestination.x, moveDestination.y].movePlayer();
+            playerButtons[player1des.x, player1des.y].movePlayer();
             resetMode();
         } 
         else if (actionMode == 2)

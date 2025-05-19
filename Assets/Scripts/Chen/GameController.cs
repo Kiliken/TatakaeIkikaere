@@ -52,6 +52,7 @@ public class GameController : MonoBehaviour
     
     // move : true / attack : false
     private bool player2CurMove;
+    private bool player1Faster;
 
 
     private void Awake()
@@ -59,6 +60,7 @@ public class GameController : MonoBehaviour
         Instance = this;
         int[] array = { 1, 3, 4, 7 };
         InitiateCharacter(1, 100, 100, 100, array);
+        InitiateCharacter(2, 100, 100, 200, array);
     }
 
     // Start is called before the first frame update
@@ -256,7 +258,6 @@ public class GameController : MonoBehaviour
             actionMode = 3;
             UpdateAction();
             executeCurrentAction();
-            
 
         }
         

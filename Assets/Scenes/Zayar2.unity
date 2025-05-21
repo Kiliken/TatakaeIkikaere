@@ -1624,7 +1624,7 @@ MonoBehaviour:
   player2CurAtkType: 0
   player1Faster: 0
   fadeInPanel: {fileID: 1627863826}
-  playerSide: 114
+  playerSide: 98
 --- !u!4 &1448757080
 Transform:
   m_ObjectHideFlags: 0

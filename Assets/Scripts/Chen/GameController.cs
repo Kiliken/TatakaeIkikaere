@@ -102,7 +102,7 @@ public class GameController : MonoBehaviour
         setOpponentButtonsActive(true);
 
         int[] array = { 1, 3, 4, 7 };
-        InitiateCharacter(1, 999, 999, 999, array);
+        InitiateCharacter(1, 222, 222, 222, array);
         //InitiateCharacter(2, 100, 100, 200, array);
         player1Faster = player1Speed > player2Speed;
         //player2CurMove = true;
@@ -269,7 +269,13 @@ public class GameController : MonoBehaviour
                 {
                     for (int y = 0; y < 3; y++)
                     {
+                        //playerButtons[x, y].gameObject.GetComponent<GridButton>().executeAttack();
+
+                        if (AttackController.Instance.IsTileAttackPattern(new Vector2Int(x, y), player2CurAtkType))
+                        {
                         playerButtons[x, y].gameObject.GetComponent<GridButton>().executeAttack();
+                        //Debug.Log("executed attack at " + x + "," + y + " at gc with type" + AttackController.Instance.currentAttackType);
+                        }
                     }
                 }
             }
@@ -323,7 +329,13 @@ public class GameController : MonoBehaviour
             {
                 for (int y = 0; y < 3; y++)
                 {
-                    playerButtons[x, y].gameObject.GetComponent<GridButton>().executeAttack();
+                    //playerButtons[x, y].gameObject.GetComponent<GridButton>().executeAttack();
+
+                    if (AttackController.Instance.IsTileAttackPattern(new Vector2Int(x, y), player2CurAtkType))
+                    {
+                        playerButtons[x, y].gameObject.GetComponent<GridButton>().executeAttack();
+                        //Debug.Log("executed attack at " + x + "," + y + " at gc with type" + AttackController.Instance.currentAttackType);
+                    }
                 }
             }
         }

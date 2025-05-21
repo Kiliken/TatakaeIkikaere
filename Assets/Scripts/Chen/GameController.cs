@@ -102,7 +102,7 @@ public class GameController : MonoBehaviour
         setOpponentButtonsActive(true);
 
         int[] array = { 1, 3, 4, 7 };
-        InitiateCharacter(1, 111, 111, 111, array);
+        InitiateCharacter(1, 222, 222, 222, array);
         //InitiateCharacter(2, 100, 100, 200, array);
         
         //player2CurMove = true;
@@ -115,6 +115,7 @@ public class GameController : MonoBehaviour
     
         actionMode = 0;
 
+        player1CurAtkType = player1AtkTypes[0];
 
 
 
@@ -132,12 +133,6 @@ public class GameController : MonoBehaviour
 
     void Update()
     {
-
-        if (false)
-        {
-            //StartCoroutine(SendNormalData($"id=123&side={playerSide}&hp={gameController.player1curHP}&pos={gameController.player1pos}&usedAtk={gameController.player1CurAtkType}&atkCtr={gameController.player1Center}"));
-
-        }
 
         if (dataSent)
         {
@@ -167,7 +162,7 @@ public class GameController : MonoBehaviour
             confirmB.SetActive(false);
             backB.SetActive(false);
             setPlayerButtonsActive(true);
-            setOpponentButtonsActive(false);
+            setOpponentButtonsActive(true);
             attackTypePanel.SetActive(true);
         }
         else if (actionMode == 1)

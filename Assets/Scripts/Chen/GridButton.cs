@@ -153,6 +153,8 @@ public class GridButton : MonoBehaviour
         worldPos = transform.position;
         worldPos.z = 0f;
 
+        Debug.Log("enemy moved to " + gridPosition.x + "," + gridPosition.y);
+
         FindObjectOfType<Ghost>().MoveTo(worldPos, gridPosition);
     }
 
@@ -162,7 +164,7 @@ public class GridButton : MonoBehaviour
         
         worldPos = transform.position;
         worldPos.z = 0f;
-        //Debug.Log("enemy moved to " + gridPosition.x + "," + gridPosition.y);
+        Debug.Log("enemy moved to " + gridPosition.x + "," + gridPosition.y);
         //Debug.Log("enemy moved to worldpos: " + worldPos.x + "," + worldPos.y);
         FindObjectOfType<EnemyGhost>().MoveTo(worldPos, gridPosition);
     }

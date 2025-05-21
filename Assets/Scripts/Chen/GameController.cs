@@ -102,9 +102,9 @@ public class GameController : MonoBehaviour
         setOpponentButtonsActive(true);
 
         int[] array = { 1, 3, 4, 7 };
-        InitiateCharacter(1, 222, 222, 222, array);
+        InitiateCharacter(1, 111, 111, 111, array);
         //InitiateCharacter(2, 100, 100, 200, array);
-        player1Faster = player1Speed > player2Speed;
+        
         //player2CurMove = true;
     }
 
@@ -231,6 +231,9 @@ public class GameController : MonoBehaviour
 
     public void executeCurrentAction()
     {
+        AttackController.Instance.p2center = player2Center;
+        player1Faster = player1Speed > player2Speed;
+
         if (player1Faster)
         {
             if (actionMode == 1)
@@ -273,8 +276,8 @@ public class GameController : MonoBehaviour
 
                         if (AttackController.Instance.IsTileAttackPatternOppo(new Vector2Int(x, y), player2CurAtkType))
                         {
-                        playerButtons[x, y].gameObject.GetComponent<GridButton>().executeAttack();
-                        //Debug.Log("executed attack at " + x + "," + y + " at gc with type" + AttackController.Instance.currentAttackType);
+                            playerButtons[x, y].gameObject.GetComponent<GridButton>().executeAttack();
+                            //Debug.Log("executed attack at " + x + "," + y + " at gc with type" + AttackController.Instance.currentAttackType);
                         }
                     }
                 }
@@ -649,7 +652,9 @@ public class GameController : MonoBehaviour
 
     public IEnumerator SendNormalData()
     {
-        
+
+        player1CurAtkType = player1CurMove ? 0 : player1CurAtkType;
+
         string path = $"id=123&side={playerSide}&hp={player1curHP}&pos={player1pos}&usedAtk={player1CurAtkType}&atkCtr={player1Center}";
         
         Debug.LogWarning(path);
@@ -703,6 +708,8 @@ public class GameController : MonoBehaviour
             player2des = data.p2Pos;
             player2CurAtkType = data.p2UsedAtk;
             player2Center = data.p2AtkCenter;
+
+            player2CurMove = player2CurAtkType == 0;
 
             executeCurrentAction();
             UpdateAction();

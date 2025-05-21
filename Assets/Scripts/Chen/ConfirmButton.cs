@@ -11,9 +11,14 @@ public class ConfirmButton : MonoBehaviour
 
     public void OnClick()
     {
+        GameController.Instance.updateP1pos();
+
+        StartCoroutine(GameController.Instance.SendNormalData());
+
         StartCoroutine(PressRoutine());
-        GameController.Instance.executeCurrentAction();
-        GameController.Instance.UpdateAction();
+
+        
+        
     }
     
     private IEnumerator PressRoutine()

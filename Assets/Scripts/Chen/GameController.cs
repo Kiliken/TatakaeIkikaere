@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.Networking;
+using System.IO;
 
 public class GameController : MonoBehaviour
 {
@@ -18,6 +21,7 @@ public class GameController : MonoBehaviour
     //  player attacked, emeny attack   3
     public int actionMode = 0;
     public bool resetComplete = false;
+
 
 
     private Vector2Int attackCenter;
@@ -55,6 +59,17 @@ public class GameController : MonoBehaviour
     private bool player1CurMove;
     private bool player2CurMove;
     public bool player1Faster;
+
+    //FROM HERE
+
+    [SerializeField] GameObject fadeInPanel;
+    [Space(12)]
+    [SerializeField] char playerSide;
+
+    float _timer = 0f;
+
+    bool dataSent = false;
+    bool firstData = true;
 
 
     private void Awake()
@@ -96,23 +111,50 @@ public class GameController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        StartCoroutine(SendInitialData($"id=123&side={playerSide}&hp={player1curHP}&atk={player1Atk}&spd={player1Speed}"));
+    
         actionMode = 0;
 
-        
+
 
 
         player2des = new Vector2Int(2, 1);
-        player2Center = new Vector2Int(1,1);
-        
+        player2Center = new Vector2Int(1, 1);
+
         player2CurAtkType = 9;
         confirmB.SetActive(true);
         backB.SetActive(true);
-        
-        oppoButtons[2,2].moveEnemy();
+
+        oppoButtons[2, 2].moveEnemy();
         //playerButtons[1, 0].movePlayer();
         UpdateAction();
     }
 
+    void Update()
+    {
+
+        if (false)
+        {
+            //StartCoroutine(SendNormalData($"id=123&side={playerSide}&hp={gameController.player1curHP}&pos={gameController.player1pos}&usedAtk={gameController.player1CurAtkType}&atkCtr={gameController.player1Center}"));
+
+        }
+
+        if (dataSent)
+        {
+            if (_timer < 2f)
+            {
+                _timer += Time.deltaTime;
+            }
+            else
+            {
+                
+                StartCoroutine(NetCheckFlag($"id=123"));
+
+                _timer = 0f;
+            }
+        }
+
+    }
 
     // Update is called after all actions
     public void UpdateAction()
@@ -121,7 +163,7 @@ public class GameController : MonoBehaviour
         if (actionMode == 0)
         {
             resetComplete = false;
-            Debug.Log($"action updated to 0000000000000000000000000000000000000000000000000");
+            //Debug.Log($"action updated to 0000000000000000000000000000000000000000000000000");
             confirmB.SetActive(false);
             backB.SetActive(false);
             setPlayerButtonsActive(true);
@@ -160,6 +202,8 @@ public class GameController : MonoBehaviour
             setOpponentButtonsActive(player2CurMove);
             attackTypePanel.SetActive(false);
         }
+
+        fadeInPanel.SetActive(false);
     }
 
     // Sets Action Mode to moving(1)
@@ -170,15 +214,18 @@ public class GameController : MonoBehaviour
         player1CurMove = true;
     }
 
+    
     public void setActionAttackType(int attackType)
     {
         actionMode = 2;
         AttackController.Instance.currentAttackType = attackType;
+        player1CurAtkType = attackType;
         player1CurMove = false;
     }
 
     public void setActionAttackLocation(Vector2Int center)
     {
+        player1Center = center;
         actionMode = 2;
     }
 
@@ -227,9 +274,9 @@ public class GameController : MonoBehaviour
                 }
             }
         }
-        
-        
-        
+
+
+
     }
 
     private void executeP1()
@@ -282,26 +329,34 @@ public class GameController : MonoBehaviour
         }
     }
 
+    public void updateP1pos()
+    {
+        player1pos = player1des;
+        fadeInPanel.GetComponent<Image>().color = new Color(0, 0, 0, 0);
+        fadeInPanel.SetActive(true);
+    }
+    
     private IEnumerator p1move()
     {
 
         playerButtons[player1des.x, player1des.y].movePlayer();
         yield return new WaitForSeconds(1f);
-        
+
     }
     private IEnumerator p2move()
-    {       
+    {
         setOpponentButtonsActive(true);
+        //player2pos = player2des;
         oppoButtons[player2des.x, player2des.y].moveEnemy();
         yield return new WaitForSeconds(1f);
-        
-        
+
+
     }
 
 
 
-    
-   
+
+
     public void resetMode()
     {
         //for (int px = 0; px < 3; px++)
@@ -357,7 +412,7 @@ public class GameController : MonoBehaviour
 
                     }
                 }
-                
+
                 actionMode = 0;
                 UpdateAction();
             }
@@ -374,7 +429,7 @@ public class GameController : MonoBehaviour
 
                     }
                 }
-                
+
                 actionMode = 3;
                 UpdateAction();
                 executeP2();
@@ -389,12 +444,12 @@ public class GameController : MonoBehaviour
 
                     }
                 }
-                
+
                 actionMode = 0;
                 UpdateAction();
             }
         }
-        
+
 
     }
     public void back()
@@ -403,10 +458,10 @@ public class GameController : MonoBehaviour
         AttackController.Instance.center = new Vector2Int(1, 1);
         AttackController.Instance.hasCenter = false;
         UpdateAction();
-        
+
     }
 
-    private void setPlayerButtonsActive(bool state) 
+    private void setPlayerButtonsActive(bool state)
     {
         for (int px = 0; px < 3; px++)
         {
@@ -430,8 +485,9 @@ public class GameController : MonoBehaviour
     }
 
 
-    public void InitiateCharacter(int playerNum, int maxHP, int atk, int spd, int[] types) { 
-        if(playerNum == 1)
+    public void InitiateCharacter(int playerNum, int maxHP, int atk, int spd, int[] types)
+    {
+        if (playerNum == 1)
         {
             player1maxHP = maxHP;
             player1curHP = maxHP;
@@ -445,13 +501,13 @@ public class GameController : MonoBehaviour
                 index++;
             }
 
-            for(int i = 0; i < 4; i++)
+            for (int i = 0; i < 4; i++)
             {
                 attackTypeButtons[i].SetAttackType(player1AtkTypes[i]);
             }
 
         }
-        else if(playerNum == 2)
+        else if (playerNum == 2)
         {
             player2maxHP = maxHP;
             player2curHP = maxHP;
@@ -464,8 +520,186 @@ public class GameController : MonoBehaviour
                 index++;
             }
         }
-        
+
 
     }
+    
+    IEnumerator RetreiveInitialData(string path)
+    {
+
+
+
+        UnityWebRequest uwr = UnityWebRequest.Get($"{NetManager.getGameStart}{path}");
+
+        yield return uwr.SendWebRequest();
+
+        if (uwr.result != UnityWebRequest.Result.Success)
+        {
+            Debug.LogError("ERROR: File not found");
+            //RETURN TO MAIN MENU
+        }
+        else
+        {
+
+
+            if (firstData)
+            {
+                string results = uwr.downloadHandler.text;
+                NetData data = NetManager.RetriveData(results, 'h');
+
+                NetManager.ASSERT(data.sts);
+
+                player2curHP = data.p2Hp;
+                player2Atk = data.p2Atk;
+                player2Speed = data.p2Spd;
+
+                firstData = false;
+
+
+                //fadeInPanel.GetComponent<Image>().CrossFadeAlpha(0, 2.0f, false);
+
+                fadeInPanel.SetActive(false);
+                
+
+                dataSent = false;
+            }
+
+        }
+
+        uwr.Dispose();
+    }
+
+    IEnumerator NetCheckFlag(string path)
+    {
+        UnityWebRequest uwr = UnityWebRequest.Get($"{NetManager.checkFlag}{path}");
+
+
+        yield return uwr.SendWebRequest();
+
+        if (uwr.result != UnityWebRequest.Result.Success)
+        {
+            Debug.LogError("ERROR: File not found");
+            //RETURN TO MAIN MENU
+        }
+        else
+        {
+            string results = uwr.downloadHandler.text;
+            NetData data = NetManager.RetriveData(results, 'f');
+
+            NetManager.ASSERT(data.sts);
+
+            if (data.flag == '2' || data.flag == '3')
+            {
+                if (firstData)
+                {
+                    StartCoroutine(RetreiveInitialData($"id=123&side={playerSide}"));
+                }
+                else
+                {
+                    StartCoroutine(RetreiveNormalData($"id=123&side={playerSide}"));
+                }
+
+
+                //if not normal
+
+            }
+
+        }
+
+        uwr.Dispose();
+    }
+
+    IEnumerator SendInitialData(string path)
+    {
+        UnityWebRequest uwr = UnityWebRequest.Get($"{NetManager.sendGameStart}{path}");
+
+
+        yield return uwr.SendWebRequest();
+
+        if (uwr.result != UnityWebRequest.Result.Success)
+        {
+            Debug.LogError("ERROR: File not found");
+            //RETURN TO MAIN MENU
+        }
+        else
+        {
+            string results = uwr.downloadHandler.text;
+            NetData data = NetManager.RetriveData(results, 's');
+
+            NetManager.ASSERT(data.sts);
+
+            dataSent = true;
+
+        }
+
+        uwr.Dispose();
+    }
+
+    public IEnumerator SendNormalData()
+    {
+        
+        string path = $"id=123&side={playerSide}&hp={player1curHP}&pos={player1pos}&usedAtk={player1CurAtkType}&atkCtr={player1Center}";
+        
+        Debug.LogWarning(path);
+
+        UnityWebRequest uwr = UnityWebRequest.Get($"{NetManager.sendData}{path}");
+
+        
+        yield return uwr.SendWebRequest();
+        
+
+        if (uwr.result != UnityWebRequest.Result.Success)
+        {
+            Debug.LogError("ERROR: File not found");
+            //RETURN TO MAIN MENU
+        }
+        else
+        {
+            string results = uwr.downloadHandler.text;
+            NetData data = NetManager.RetriveData(results, 's');
+
+            NetManager.ASSERT(data.sts);
+
+
+
+            dataSent = true;
+        }
+
+        Debug.Log("haha");
+        uwr.Dispose();
+    }
+    
+    IEnumerator RetreiveNormalData(string path)
+   {
+       UnityWebRequest uwr = UnityWebRequest.Get($"{NetManager.getData}{path}");
+
+
+       yield return uwr.SendWebRequest();
+
+       if (uwr.result != UnityWebRequest.Result.Success)
+       {
+           Debug.LogError("ERROR: File not found");
+           //RETURN TO MAIN MENU
+       }
+       else
+       {
+           string results = uwr.downloadHandler.text;
+           NetData data = NetManager.RetriveData(results, 'r');
+
+           NetManager.ASSERT(data.sts);
+            
+            player2pos = data.p2Pos;
+            player2CurAtkType = data.p2UsedAtk;
+            player2Center = data.p2AtkCenter;
+
+            GameController.Instance.executeCurrentAction();
+            GameController.Instance.UpdateAction();
+
+            dataSent = false;
+            
+       }
+
+       uwr.Dispose();
+   }
 
 }

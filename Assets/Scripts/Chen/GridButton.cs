@@ -171,7 +171,7 @@ public class GridButton : MonoBehaviour
     {
         AttackController.Instance.hasCenter = true;
         AttackController.Instance.center = gridPosition;
-        GameController.Instance.actionMode = 2;
+        GameController.Instance.setActionAttackLocation(gridPosition);
     }
 
     private void cancelAim()

@@ -915,8 +915,8 @@ Camera:
   m_GameObject: {fileID: 1081150856}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0.08627451, g: 0.007843138, b: 0.015686275, a: 1}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -1547,6 +1547,7 @@ MonoBehaviour:
   - {fileID: 1498385144}
   - {fileID: 2033038220}
   actionMode: 0
+  resetComplete: 0
   confirmB: {fileID: 1635587710}
   backB: {fileID: 1308949718}
   attackTypePanel: {fileID: 42406634}

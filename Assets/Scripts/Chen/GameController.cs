@@ -105,7 +105,7 @@ public class GameController : MonoBehaviour
         InitiateCharacter(1, 999, 999, 999, array);
         //InitiateCharacter(2, 100, 100, 200, array);
         player1Faster = player1Speed > player2Speed;
-        player2CurMove = true;
+        //player2CurMove = true;
     }
 
     // Start is called before the first frame update
@@ -118,14 +118,14 @@ public class GameController : MonoBehaviour
 
 
 
-        player2des = new Vector2Int(2, 1);
-        player2Center = new Vector2Int(1, 1);
+        //player2des = new Vector2Int(2, 1);
+        //player2Center = new Vector2Int(1, 1);
 
-        player2CurAtkType = 9;
+        //player2CurAtkType = 9;
         confirmB.SetActive(true);
         backB.SetActive(true);
 
-        oppoButtons[2, 2].moveEnemy();
+        //oppoButtons[2, 2].moveEnemy();
         //playerButtons[1, 0].movePlayer();
         UpdateAction();
     }

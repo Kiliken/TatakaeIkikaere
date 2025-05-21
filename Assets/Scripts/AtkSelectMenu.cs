@@ -48,6 +48,7 @@ public class AtkSelectMenu : MonoBehaviour
 
     public void OnCompleteBtnPressed()
     {
+        selectedAtk.Sort();
         statSave.AtkTypes = selectedAtk.ToArray();
         SceneManager.LoadScene("Zayar2");
     }

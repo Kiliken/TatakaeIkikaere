@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameController : MonoBehaviour
@@ -16,7 +17,7 @@ public class GameController : MonoBehaviour
     //  attack type selected:           2
     //  player attacked, emeny attack   3
     public int actionMode = 0;
-
+    public bool resetComplete = false;
 
 
     private Vector2Int attackCenter;
@@ -49,25 +50,19 @@ public class GameController : MonoBehaviour
     public Vector2Int player1Center;
     public Vector2Int player2Center;
     public int player2CurAtkType;
-    
+
     // move : true / attack : false
+    private bool player1CurMove;
     private bool player2CurMove;
-    private bool player1Faster;
+    public bool player1Faster;
 
 
     private void Awake()
     {
+        QualitySettings.vSyncCount = 0;
+        Application.targetFrameRate = 60;
+
         Instance = this;
-        int[] array = { 1, 3, 4, 7 };
-        InitiateCharacter(1, 100, 100, 100, array);
-        InitiateCharacter(2, 100, 100, 200, array);
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        actionMode = 0;
-
         int count = 0;
         for (int py = 0; py < 3; py++)
         {
@@ -88,16 +83,31 @@ public class GameController : MonoBehaviour
                 count++;
             }
         }
-
-        
-        
-        player2des = new Vector2Int(2, 1);
-        player2Center = new Vector2Int(2, 2);
-        player2CurMove = true;
-        confirmB.SetActive(true);
-        backB.SetActive(true);
         setPlayerButtonsActive(true);
         setOpponentButtonsActive(true);
+
+        int[] array = { 1, 3, 4, 7 };
+        InitiateCharacter(1, 100, 100, 100, array);
+        InitiateCharacter(2, 100, 100, 200, array);
+        player1Faster = player1Speed > player2Speed;
+        player2CurMove = false;
+    }
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        actionMode = 0;
+
+        
+
+
+        player2des = new Vector2Int(2, 1);
+        player2Center = new Vector2Int(1,1);
+        
+        player2CurAtkType = 9;
+        confirmB.SetActive(true);
+        backB.SetActive(true);
+        
         oppoButtons[2,2].moveEnemy();
         //playerButtons[1, 0].movePlayer();
         UpdateAction();
@@ -107,11 +117,11 @@ public class GameController : MonoBehaviour
     // Update is called after all actions
     public void UpdateAction()
     {
-        Debug.Log("update action");
+        //Debug.Log("update action");
         if (actionMode == 0)
         {
-            
-
+            resetComplete = false;
+            Debug.Log($"action updated to 0000000000000000000000000000000000000000000000000");
             confirmB.SetActive(false);
             backB.SetActive(false);
             setPlayerButtonsActive(true);
@@ -155,13 +165,15 @@ public class GameController : MonoBehaviour
     public void setActionMove(Vector2Int destination)
     {
         actionMode = 1;
-        player1des = destination; 
+        player1des = destination;
+        player1CurMove = true;
     }
 
     public void setActionAttackType(int attackType)
     {
         actionMode = 2;
         AttackController.Instance.currentAttackType = attackType;
+        player1CurMove = false;
     }
 
     public void setActionAttackLocation(Vector2Int center)
@@ -171,39 +183,35 @@ public class GameController : MonoBehaviour
 
     public void executeCurrentAction()
     {
-        if(actionMode == 1)
+        if (player1Faster)
         {
-            playerButtons[player1des.x, player1des.y].movePlayer();
-            resetMode();
-        } 
-        else if (actionMode == 2)
-        {
-            
-            for (int x = 0; x < 3; x++)
+            if (actionMode == 1)
             {
-                for (int y = 0; y < 3; y++)
-                {
-                    if (AttackController.Instance.IsTileAttackPattern(new Vector2Int(x , y), AttackController.Instance.currentAttackType))
-                    {
-                        oppoButtons[x, y].gameObject.GetComponent<GridButton>().executeAttack();
-                        Debug.Log("executed attack at " + x + "," + y);
-                    }
-                        
-                        
-                       
-                }
+                StartCoroutine(p1move());
+                resetMode();
             }
-
-            AttackController.Instance.ExecuteAttack();
-
+            else if (actionMode == 2)
+            {
+                for (int x = 0; x < 3; x++)
+                {
+                    for (int y = 0; y < 3; y++)
+                    {
+                        if (AttackController.Instance.IsTileAttackPattern(new Vector2Int(x, y), AttackController.Instance.currentAttackType))
+                        {
+                            oppoButtons[x, y].gameObject.GetComponent<GridButton>().executeAttack();
+                            //Debug.Log("executed attack at " + x + "," + y +" at gc with type" + AttackController.Instance.currentAttackType);
+                        }
+                    }
+                }
+                AttackController.Instance.ExecuteAttack();
+            }
         }
-        else if (actionMode == 3)
+        else if (!player1Faster)
         {
-
+            actionMode = 3;
             if (player2CurMove)
             {
-                setOpponentButtonsActive(true);
-                oppoButtons[player2des.x, player2des.y].moveEnemy();
+                StartCoroutine(p2move());
                 resetMode();
             }
             else if (!player2CurMove)
@@ -217,48 +225,173 @@ public class GameController : MonoBehaviour
                     }
                 }
             }
-            
         }
         
         
         
     }
-    
-   
-    public void resetMode()
-    {
-        for (int px = 0; px < 3; px++)
-        {
-            for (int py = 0; py < 3; py++)
-            {
-                oppoButtons[px, py].gameObject.transform.Find("AttackImage").gameObject.SetActive(false);
-                
-            }
-        }
-        //setOpponentButtonsActive(false);
 
-        if (actionMode == 3)
+    private void executeP1()
+    {
+        if (player1CurMove)
         {
-            for (int px = 0; px < 3; px++)
+            StartCoroutine(p1move());
+            resetMode();
+        }
+        else if (!player1CurMove)
+        {
+
+            for (int x = 0; x < 3; x++)
             {
-                for (int py = 0; py < 3; py++)
+                for (int y = 0; y < 3; y++)
                 {
-                    playerButtons[px, py].gameObject.transform.Find("AttackImage").gameObject.SetActive(false);
+                    if (AttackController.Instance.IsTileAttackPattern(new Vector2Int(x, y), AttackController.Instance.currentAttackType))
+                    {
+                        oppoButtons[x, y].gameObject.GetComponent<GridButton>().executeAttack();
+                        //Debug.Log("executed attack at " + x + "," + y + " at gc with type" + AttackController.Instance.currentAttackType);
+                    }
+
+
 
                 }
             }
 
+            AttackController.Instance.ExecuteAttack();
 
-            actionMode = 0;
-            UpdateAction();
+        }
+    }
 
+    private void executeP2()
+    {
+        if (player2CurMove)
+        {
+            StartCoroutine(p2move());
+            resetMode();
+        }
+        else if (!player2CurMove)
+        {
+            AttackController.Instance.p2center = player2Center;
+            for (int x = 0; x < 3; x++)
+            {
+                for (int y = 0; y < 3; y++)
+                {
+                    playerButtons[x, y].gameObject.GetComponent<GridButton>().executeAttack();
+                }
+            }
+        }
+    }
+
+    private IEnumerator p1move()
+    {
+
+        playerButtons[player1des.x, player1des.y].movePlayer();
+        yield return new WaitForSeconds(1f);
+        
+    }
+    private IEnumerator p2move()
+    {       
+        setOpponentButtonsActive(true);
+        oppoButtons[player2des.x, player2des.y].moveEnemy();
+        yield return new WaitForSeconds(1f);
+        
+        
+    }
+
+
+
+    
+   
+    public void resetMode()
+    {
+        //for (int px = 0; px < 3; px++)
+        //{
+        //    for (int py = 0; py < 3; py++)
+        //    {
+        //        playerButtons[px, py].gameObject.transform.Find("AttackImage").gameObject.SetActive(false);
+
+        //    }
+        //}
+        //for (int px = 0; px < 3; px++)
+        //{
+        //    for (int py = 0; py < 3; py++)
+        //    {
+        //        oppoButtons[px, py].gameObject.transform.Find("AttackImage").gameObject.SetActive(false);
+
+        //    }
+        //}
+
+
+
+        if (actionMode == 3)
+        {
+            if (!player1Faster)
+            {
+                for (int px = 0; px < 3; px++)
+                {
+                    for (int py = 0; py < 3; py++)
+                    {
+                        playerButtons[px, py].gameObject.transform.Find("AttackImage").gameObject.SetActive(false);
+
+                    }
+                }
+                if (player1CurMove)
+                {
+                    actionMode = 1;
+                }
+                else
+                {
+                    actionMode = 2;
+                }
+
+                UpdateAction();
+                executeP1();
+            }
+            else
+            {
+                for (int px = 0; px < 3; px++)
+                {
+                    for (int py = 0; py < 3; py++)
+                    {
+                        playerButtons[px, py].gameObject.transform.Find("AttackImage").gameObject.SetActive(false);
+
+                    }
+                }
+                
+                actionMode = 0;
+                UpdateAction();
+            }
         }
         else if (actionMode == 1 || actionMode == 2)
         {
-            actionMode = 3;
-            UpdateAction();
-            executeCurrentAction();
+            if (player1Faster)
+            {
+                for (int px = 0; px < 3; px++)
+                {
+                    for (int py = 0; py < 3; py++)
+                    {
+                        oppoButtons[px, py].gameObject.transform.Find("AttackImage").gameObject.SetActive(false);
 
+                    }
+                }
+                
+                actionMode = 3;
+                UpdateAction();
+                executeP2();
+            }
+            else
+            {
+                for (int px = 0; px < 3; px++)
+                {
+                    for (int py = 0; py < 3; py++)
+                    {
+                        oppoButtons[px, py].gameObject.transform.Find("AttackImage").gameObject.SetActive(false);
+
+                    }
+                }
+                
+                actionMode = 0;
+                UpdateAction();
+            }
         }
         
 
@@ -268,6 +401,7 @@ public class GameController : MonoBehaviour
         actionMode = 0;
         AttackController.Instance.center = new Vector2Int(1, 1);
         AttackController.Instance.hasCenter = false;
+        UpdateAction();
         
     }
 

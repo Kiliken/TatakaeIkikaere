@@ -6,10 +6,10 @@ public class AttackController : MonoBehaviour
 {
 
     public static AttackController Instance;
-    public int currentAttackType = 1;
+    public int currentAttackType;
     public bool hasCenter = false;
     public Vector2Int center = new Vector2Int(1,1);
-    public int p2attackType = 1;
+    public int p2attackType;
     public bool p2hasCenter = true;
     public Vector2Int p2center = new Vector2Int(1, 1);
 
@@ -27,7 +27,7 @@ public class AttackController : MonoBehaviour
 
     public bool IsTileAttackPattern(Vector2Int checkPos, int atkType)
     {
-
+        //Debug.Log("pos checked at " + checkPos.x + ", " + checkPos.y + " with type " + atkType);
         Vector2Int offset = checkPos - center;
 
         switch (atkType)
@@ -82,7 +82,10 @@ public class AttackController : MonoBehaviour
         center = p2center;
 
         bool ret = IsTileAttackPattern(checkPos, atkType);
+
         center = tempC;
+
+        //Debug.Log($"center is now {center}");
         return ret;
     }
 

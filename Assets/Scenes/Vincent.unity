@@ -1547,7 +1547,6 @@ MonoBehaviour:
   - {fileID: 1498385144}
   - {fileID: 2033038220}
   actionMode: 0
-  moveDestination: {x: 0, y: 0}
   confirmB: {fileID: 1635587710}
   backB: {fileID: 1308949718}
   attackTypePanel: {fileID: 42406634}
@@ -1569,6 +1568,7 @@ MonoBehaviour:
   player1Center: {x: 0, y: 0}
   player2Center: {x: 0, y: 0}
   player2CurAtkType: 0
+  player1Faster: 0
 --- !u!4 &1448757080
 Transform:
   m_ObjectHideFlags: 0

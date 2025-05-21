@@ -67,7 +67,7 @@ public class GridButton : MonoBehaviour
         }
         else if (GameController.Instance.actionMode == 1)
         {
-            if (GameController.Instance.player1des == gridPosition)
+            if (GameController.Instance.player1des == gridPosition && InProx(FindObjectOfType<Ghost>().gridPosition))
             {
                 SetVisible(destination);
                 SetTransparent(panelImage);
@@ -162,8 +162,8 @@ public class GridButton : MonoBehaviour
         
         worldPos = transform.position;
         worldPos.z = 0f;
-        Debug.Log("enemy moved to " + gridPosition.x + "," + gridPosition.y);
-        Debug.Log("enemy moved to worldpos: " + worldPos.x + "," + worldPos.y);
+        //Debug.Log("enemy moved to " + gridPosition.x + "," + gridPosition.y);
+        //Debug.Log("enemy moved to worldpos: " + worldPos.x + "," + worldPos.y);
         FindObjectOfType<EnemyGhost>().MoveTo(worldPos, gridPosition);
     }
 
@@ -183,35 +183,47 @@ public class GridButton : MonoBehaviour
     {
         if(GameController.Instance.actionMode == 2)
         {
-            if (AttackController.Instance.IsTileAttackPattern(gridPosition, AttackController.Instance.currentAttackType))
-            {
-                SetTransparent(attackAim);
-                SetTransparent(centerAttackAim);
-                attackImage.gameObject.SetActive(true);
-                SetVisible(attackImage);
+            //if (AttackController.Instance.IsTileAttackPattern(gridPosition, AttackController.Instance.currentAttackType))
+            //{
+            //    Debug.Log("executed attack at " + gridPosition.x + "," + gridPosition.y + " with type " + AttackController.Instance.currentAttackType);
+            //    SetTransparent(attackAim);
+            //    SetTransparent(centerAttackAim);
+            //    attackImage.gameObject.SetActive(true);
+            //    SetVisible(attackImage);
 
-            }
-            else
-            {
-                SetTransparent(attackAim);
-                SetTransparent(centerAttackAim);
-            }
+            //}
+            //else
+            //{
+            //    SetTransparent(attackAim);
+            //    SetTransparent(centerAttackAim);
+            //}
+            Debug.Log("executed attack at " + gridPosition.x + "," + gridPosition.y + " with type " + AttackController.Instance.currentAttackType);
+            SetTransparent(attackAim);
+            SetTransparent(centerAttackAim);
+            attackImage.gameObject.SetActive(true);
+            SetVisible(attackImage);
         }
         else if (GameController.Instance.actionMode == 3)
         {
-            if (AttackController.Instance.IsTileAttackPatternOppo(gridPosition, AttackController.Instance.p2attackType))
-            {
-                SetTransparent(attackAim);
-                SetTransparent(centerAttackAim);
-                attackImage.gameObject.SetActive(true);
-                SetVisible(attackImage);
+            //if (AttackController.Instance.IsTileAttackPatternOppo(gridPosition, AttackController.Instance.p2attackType))
+            //{
+            //    Debug.Log("executed attack at " + gridPosition.x + "," + gridPosition.y + " with type " + AttackController.Instance.currentAttackType);
+            //    SetTransparent(attackAim);
+            //    SetTransparent(centerAttackAim);
+            //    attackImage.gameObject.SetActive(true);
+            //    SetVisible(attackImage);
 
-            }
-            else
-            {
-                SetTransparent(attackAim);
-                SetTransparent(centerAttackAim);
-            }
+            //}
+            //else
+            //{
+            //    SetTransparent(attackAim);
+            //    SetTransparent(centerAttackAim);
+            //}
+            //Debug.Log("executed attack at " + gridPosition.x + "," + gridPosition.y + " with type " + AttackController.Instance.currentAttackType);
+            SetTransparent(attackAim);
+            SetTransparent(centerAttackAim);
+            attackImage.gameObject.SetActive(true);
+            SetVisible(attackImage);
         }
 
     }

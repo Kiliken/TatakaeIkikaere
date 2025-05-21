@@ -42,6 +42,8 @@ public static class NetManager
 
     public static readonly string checkFlag = $"{SERVER}checkFlag.php?";
 
+    public static readonly string deleteSession = $"{SERVER}deleteSession.php?";
+
 
     //SERVER ASSERT
     public static void ASSERT(char status)

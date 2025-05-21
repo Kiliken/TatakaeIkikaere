@@ -106,7 +106,7 @@ public class GameController : MonoBehaviour
         //int[] array = { 1, 3, 4, 7 };
         InitiateCharacter(1, statSave.maxHP, statSave.Atk, statSave.Speed, statSave.AtkTypes);
         //InitiateCharacter(2, 100, 100, 200, array);
-        
+
         //player2CurMove = true;
     }
 
@@ -114,7 +114,7 @@ public class GameController : MonoBehaviour
     void Start()
     {
         StartCoroutine(SendInitialData($"id=123&side={playerSide}&hp={player1curHP}&atk={player1Atk}&spd={player1Speed}"));
-    
+
         actionMode = 0;
 
         player1CurAtkType = player1AtkTypes[0];
@@ -131,6 +131,7 @@ public class GameController : MonoBehaviour
         //oppoButtons[2, 2].moveEnemy();
         //playerButtons[1, 0].movePlayer();
         UpdateAction();
+        fadeInPanel.SetActive(true);
     }
 
     void Update()
@@ -144,7 +145,7 @@ public class GameController : MonoBehaviour
             }
             else
             {
-                
+
                 StartCoroutine(NetCheckFlag($"id=123"));
 
                 _timer = 0f;
@@ -211,7 +212,7 @@ public class GameController : MonoBehaviour
         player1CurMove = true;
     }
 
-    
+
     public void setActionAttackType(int attackType)
     {
         actionMode = 2;
@@ -347,7 +348,7 @@ public class GameController : MonoBehaviour
         fadeInPanel.GetComponent<Image>().color = new Color(0, 0, 0, 0);
         fadeInPanel.SetActive(true);
     }
-    
+
     private IEnumerator p1move()
     {
 
@@ -535,7 +536,7 @@ public class GameController : MonoBehaviour
 
 
     }
-    
+
     IEnumerator RetreiveInitialData(string path)
     {
 
@@ -571,7 +572,7 @@ public class GameController : MonoBehaviour
                 //fadeInPanel.GetComponent<Image>().CrossFadeAlpha(0, 2.0f, false);
 
                 fadeInPanel.SetActive(false);
-                
+
 
                 dataSent = false;
             }
@@ -653,14 +654,12 @@ public class GameController : MonoBehaviour
         player1CurAtkType = player1CurMove ? 0 : player1CurAtkType;
 
         string path = $"id=123&side={playerSide}&hp={player1curHP}&pos={player1pos}&usedAtk={player1CurAtkType}&atkCtr={player1Center}";
-        
-        Debug.LogWarning(path);
 
         UnityWebRequest uwr = UnityWebRequest.Get($"{NetManager.sendData}{path}");
 
-        
+
         yield return uwr.SendWebRequest();
-        
+
 
         if (uwr.result != UnityWebRequest.Result.Success)
         {
@@ -678,30 +677,28 @@ public class GameController : MonoBehaviour
 
             dataSent = true;
         }
-
-        Debug.Log("haha");
         uwr.Dispose();
     }
-    
+
     IEnumerator RetreiveNormalData(string path)
-   {
-       UnityWebRequest uwr = UnityWebRequest.Get($"{NetManager.getData}{path}");
+    {
+        UnityWebRequest uwr = UnityWebRequest.Get($"{NetManager.getData}{path}");
 
 
-       yield return uwr.SendWebRequest();
+        yield return uwr.SendWebRequest();
 
-       if (uwr.result != UnityWebRequest.Result.Success)
-       {
-           Debug.LogError("ERROR: File not found");
-           //RETURN TO MAIN MENU
-       }
-       else
-       {
-           string results = uwr.downloadHandler.text;
-           NetData data = NetManager.RetriveData(results, 'r');
+        if (uwr.result != UnityWebRequest.Result.Success)
+        {
+            Debug.LogError("ERROR: File not found");
+            //RETURN TO MAIN MENU
+        }
+        else
+        {
+            string results = uwr.downloadHandler.text;
+            NetData data = NetManager.RetriveData(results, 'r');
 
-           NetManager.ASSERT(data.sts);
-            
+            NetManager.ASSERT(data.sts);
+
             player2des = data.p2Pos;
             player2CurAtkType = data.p2UsedAtk;
             player2Center = data.p2AtkCenter;
@@ -712,10 +709,38 @@ public class GameController : MonoBehaviour
             UpdateAction();
 
             dataSent = false;
-            
-       }
 
-       uwr.Dispose();
-   }
+        }
+
+        uwr.Dispose();
+    }
+   
+    IEnumerator DeleteSession()
+    {
+        string path = $"id=123";
+        
+
+        UnityWebRequest uwr = UnityWebRequest.Get($"{NetManager.sendData}{path}");
+
+        
+        yield return uwr.SendWebRequest();
+
+
+        if (uwr.result != UnityWebRequest.Result.Success)
+        {
+            Debug.LogError("ERROR: File not found");
+            //RETURN TO MAIN MENU
+        }
+        else
+        {
+            string results = uwr.downloadHandler.text;
+            NetData data = NetManager.RetriveData(results, 's');
+
+            NetManager.ASSERT(data.sts);
+
+            
+        }
+        uwr.Dispose();
+    }
 
 }

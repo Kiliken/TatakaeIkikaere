@@ -271,7 +271,7 @@ public class GameController : MonoBehaviour
                     {
                         //playerButtons[x, y].gameObject.GetComponent<GridButton>().executeAttack();
 
-                        if (AttackController.Instance.IsTileAttackPattern(new Vector2Int(x, y), player2CurAtkType))
+                        if (AttackController.Instance.IsTileAttackPatternOppo(new Vector2Int(x, y), player2CurAtkType))
                         {
                         playerButtons[x, y].gameObject.GetComponent<GridButton>().executeAttack();
                         //Debug.Log("executed attack at " + x + "," + y + " at gc with type" + AttackController.Instance.currentAttackType);
@@ -331,7 +331,7 @@ public class GameController : MonoBehaviour
                 {
                     //playerButtons[x, y].gameObject.GetComponent<GridButton>().executeAttack();
 
-                    if (AttackController.Instance.IsTileAttackPattern(new Vector2Int(x, y), player2CurAtkType))
+                    if (AttackController.Instance.IsTileAttackPatternOppo(new Vector2Int(x, y), player2CurAtkType))
                     {
                         playerButtons[x, y].gameObject.GetComponent<GridButton>().executeAttack();
                         //Debug.Log("executed attack at " + x + "," + y + " at gc with type" + AttackController.Instance.currentAttackType);
@@ -700,12 +700,12 @@ public class GameController : MonoBehaviour
 
            NetManager.ASSERT(data.sts);
             
-            player2pos = data.p2Pos;
+            player2des = data.p2Pos;
             player2CurAtkType = data.p2UsedAtk;
             player2Center = data.p2AtkCenter;
 
-            GameController.Instance.executeCurrentAction();
-            GameController.Instance.UpdateAction();
+            executeCurrentAction();
+            UpdateAction();
 
             dataSent = false;
             

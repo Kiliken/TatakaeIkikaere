@@ -8,6 +8,7 @@ using System.IO;
 
 public class GameController : MonoBehaviour
 {
+    StatSave statSave;
     [SerializeField] private GridButton[] playerGridButtons;
     [SerializeField] private GridButton[] opponentGridButtons;
     [SerializeField] private AttackTypeButton[] attackTypeButtons;
@@ -101,8 +102,9 @@ public class GameController : MonoBehaviour
         setPlayerButtonsActive(true);
         setOpponentButtonsActive(true);
 
-        int[] array = { 1, 3, 4, 7 };
-        InitiateCharacter(1, 222, 222, 222, array);
+        statSave = GameObject.FindGameObjectWithTag("StatSave").GetComponent<StatSave>();
+        //int[] array = { 1, 3, 4, 7 };
+        InitiateCharacter(1, statSave.maxHP, statSave.Atk, statSave.Speed, statSave.AtkTypes);
         //InitiateCharacter(2, 100, 100, 200, array);
         
         //player2CurMove = true;

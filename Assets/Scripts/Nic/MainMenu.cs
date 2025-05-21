@@ -5,11 +5,18 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-    public void PlayGame()
+    // public void PlayGame()
+    // {
+    //     Debug.Log("pressed");
+    //     SceneManager.LoadScene("Zayar2");
+    // }
+
+    public void LoadStatSelection()
     {
-        Debug.Log("pressed");
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene("StatSelectScene");
     }
+
+
     public void QuitGame()
     {
         Application.Quit();

@@ -90,7 +90,7 @@ public class GameController : MonoBehaviour
         InitiateCharacter(1, 100, 100, 100, array);
         InitiateCharacter(2, 100, 100, 200, array);
         player1Faster = player1Speed > player2Speed;
-        player2CurMove = false;
+        player2CurMove = true;
     }
 
     // Start is called before the first frame update
@@ -136,6 +136,7 @@ public class GameController : MonoBehaviour
             backB.SetActive(true);
             backB.GetComponent<BackButton>().notPressedObj.SetActive(true);
             setPlayerButtonsActive(true);
+            AttackController.Instance.hasCenter = false;
             setOpponentButtonsActive(player2CurMove);
             attackTypePanel.SetActive(false);
         }

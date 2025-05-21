@@ -6,24 +6,80 @@ using TMPro;
 
 public class NumberControllerAtk : MonoBehaviour
 {
-    public Text numberText;
+    public TextMeshProUGUI atkText;
+    public TextMeshProUGUI hpText;
+    public TextMeshProUGUI spdText;
+    public TextMeshProUGUI statPoolText;
 
-    private int currentValue = 100;
+    public int statPool = 100;
+    public int currentValueAtk = 100;
+    public int currentValueHp = 100;
+    public int currentValueSpd = 100;
 
-    public void Increase()
+    public void IncreaseAtk()
     {
-        currentValue++;
-        UpdateUI();
+        if (statPool>=10) {
+          currentValueAtk+=10;
+          statPool-=10;
+          atkText.text = currentValueAtk.ToString();
+          statPoolText.text = statPool.ToString();
+        }
     }
 
-    public void Decrease()
+    public void DecreaseAtk()
     {
-        currentValue--;
-        UpdateUI();
+        if (currentValueAtk>=110) {
+            currentValueAtk-=10;
+            statPool+=10;
+            atkText.text = currentValueAtk.ToString();
+            statPoolText.text = statPool.ToString();
+        }
+    }
+
+    public void IncreaseHp()
+    {
+        if (statPool>=10) {
+          currentValueHp+=10;
+          statPool-=10;
+          hpText.text = currentValueHp.ToString();
+          statPoolText.text = statPool.ToString();
+        }
+    }
+
+    public void DecreaseHp()
+    {
+        if (currentValueHp>=110) {
+            currentValueHp-=10;
+            statPool+=10;
+            hpText.text = currentValueHp.ToString();
+            statPoolText.text = statPool.ToString();
+        }
+    }
+
+    public void IncreaseSpd()
+    {
+        if (statPool>=10) {
+          currentValueSpd+=10;
+          statPool-=10;
+          spdText.text = currentValueSpd.ToString();
+          statPoolText.text = statPool.ToString();
+        }
+    }
+
+    public void DecreaseSpd()
+    {
+        if (currentValueSpd>=110) {
+            currentValueSpd-=10;
+            statPool+=10;
+            spdText.text = currentValueSpd.ToString();
+            statPoolText.text = statPool.ToString();
+        }
     }
 
     private void UpdateUI()
     {
-        numberText.text = currentValue.ToString();
+        // if (statPool=0) {
+            
+        // }
     }
 }

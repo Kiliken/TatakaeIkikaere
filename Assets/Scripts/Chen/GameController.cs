@@ -102,8 +102,8 @@ public class GameController : MonoBehaviour
         setOpponentButtonsActive(true);
 
         int[] array = { 1, 3, 4, 7 };
-        InitiateCharacter(1, 100, 100, 100, array);
-        InitiateCharacter(2, 100, 100, 200, array);
+        InitiateCharacter(1, 999, 999, 999, array);
+        //InitiateCharacter(2, 100, 100, 200, array);
         player1Faster = player1Speed > player2Speed;
         player2CurMove = true;
     }

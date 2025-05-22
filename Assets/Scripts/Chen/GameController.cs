@@ -75,6 +75,8 @@ public class GameController : MonoBehaviour
     [SerializeField] Image p1HpBar;
     [SerializeField] Image p2HpBar;
 
+    private int[] attackDamageList = { 0,50,40,30,25,20,12,10,8,7};
+
 
     private void Awake()
     {
@@ -244,6 +246,7 @@ public class GameController : MonoBehaviour
             }
             else if (actionMode == 2)
             {
+                Vector2 tempPos = FindObjectOfType<EnemyGhost>().gridPosition;
                 for (int x = 0; x < 3; x++)
                 {
                     for (int y = 0; y < 3; y++)
@@ -252,12 +255,20 @@ public class GameController : MonoBehaviour
                         {
                             oppoButtons[x, y].gameObject.GetComponent<GridButton>().executeAttack();
 
-                            if (player2pos.x == x && player2pos.y == y)
+                            if (tempPos.x == x && tempPos.y == y)
                             {
                                 Debug.Log("Player2 HIT");
-                                player2curHP -= 10;
+                                player2curHP -= attackDamageList[player1CurAtkType];
+
+                                if(player2curHP <= 0)
+                                {
+                                    //StartCoroutine(DeleteSession());
+                                    //win
+                                }
 
                                 p2HpBar.fillAmount = (float)player2curHP / (float)player2maxHP;
+
+                                
                             }
 
                             Debug.Log("executed attack at " + x + "," + y + " at gc with type" + player1CurAtkType);
@@ -278,6 +289,7 @@ public class GameController : MonoBehaviour
             else if (!player2CurMove)
             {
                 AttackController.Instance.p2center = player2Center;
+                Vector2 tempPos = FindObjectOfType<Ghost>().gridPosition;
                 for (int x = 0; x < 3; x++)
                 {
                     for (int y = 0; y < 3; y++)
@@ -286,12 +298,19 @@ public class GameController : MonoBehaviour
 
                         if (AttackController.Instance.IsTileAttackPatternOppo(new Vector2Int(x, y), player2CurAtkType))
                         {
-                            if (player1pos.x == x && player1pos.y == y)
+                            if (tempPos.x == x && tempPos.y == y)
                             {
                                 Debug.Log("Player1 HIT");
-                                player1curHP -= 10;
+                                player1curHP -= attackDamageList[player2CurAtkType];
+
+                                if (player1curHP <= 0)
+                                {
+                                    //StartCoroutine(DeleteSession());
+                                    //Lose
+                                }
 
                                 p1HpBar.fillAmount = (float)player1curHP / (float)player1maxHP;
+                                
                             }
 
                             playerButtons[x, y].gameObject.GetComponent<GridButton>().executeAttack();
@@ -315,19 +334,25 @@ public class GameController : MonoBehaviour
         }
         else if (!player1CurMove)
         {
-
+            Vector2 tempPos = FindObjectOfType<EnemyGhost>().gridPosition;
             for (int x = 0; x < 3; x++)
             {
                 for (int y = 0; y < 3; y++)
                 {
                     if (AttackController.Instance.IsTileAttackPattern(new Vector2Int(x, y), player1CurAtkType))
                     {
-                        if (player2pos.x == x && player2pos.y == y)
+                        if (tempPos.x == x && tempPos.y == y)
                         {
                             Debug.Log("Player2 HIT");
-                            player2curHP -= 10;
+                            player2curHP -= attackDamageList[player1CurAtkType];
 
-                            Debug.Log((float)player2maxHP / (float)player2curHP);
+                            if (player2curHP <= 0)
+                            {
+                                //StartCoroutine(DeleteSession());
+                                //win
+                            }
+
+
 
                             p2HpBar.fillAmount = (float)player2curHP / (float)player2maxHP;
                         }
@@ -356,6 +381,7 @@ public class GameController : MonoBehaviour
         else if (!player2CurMove)
         {
             AttackController.Instance.p2center = player2Center;
+            Vector2 tempPos = FindObjectOfType<Ghost>().gridPosition;
             for (int x = 0; x < 3; x++)
             {
                 for (int y = 0; y < 3; y++)
@@ -364,10 +390,16 @@ public class GameController : MonoBehaviour
 
                     if (AttackController.Instance.IsTileAttackPatternOppo(new Vector2Int(x, y), player2CurAtkType))
                     {
-                        if (player1pos.x == x && player1pos.y == y)
+                        if (tempPos.x == x && tempPos.y == y)
                         {
                             Debug.Log("Player1 HIT");
-                            player1curHP -= 10;
+                            player1curHP -= attackDamageList[player2CurAtkType];
+
+                            if (player1curHP <= 0)
+                            {
+                                //StartCoroutine(DeleteSession());
+                                //Lose
+                            }
 
 
                             p1HpBar.fillAmount =  (float)player1curHP / (float)player1maxHP ;
@@ -761,7 +793,7 @@ public class GameController : MonoBehaviour
         string path = $"id=123";
         
 
-        UnityWebRequest uwr = UnityWebRequest.Get($"{NetManager.sendData}{path}");
+        UnityWebRequest uwr = UnityWebRequest.Get($"{NetManager.deleteSession}{path}");
 
         
         yield return uwr.SendWebRequest();

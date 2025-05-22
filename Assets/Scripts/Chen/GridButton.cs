@@ -199,7 +199,7 @@ public class GridButton : MonoBehaviour
             //    SetTransparent(attackAim);
             //    SetTransparent(centerAttackAim);
             //}
-            Debug.Log("executed attack at " + gridPosition.x + "," + gridPosition.y + " with type " + AttackController.Instance.currentAttackType);
+            //Debug.Log("executed attack at " + gridPosition.x + "," + gridPosition.y + " with type " + AttackController.Instance.currentAttackType);
             SetTransparent(attackAim);
             SetTransparent(centerAttackAim);
             attackImage.gameObject.SetActive(true);

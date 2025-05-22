@@ -260,7 +260,7 @@ public class GameController : MonoBehaviour
                                 p2HpBar.fillAmount = (float)player2curHP / (float)player2maxHP;
                             }
 
-                            //Debug.Log("executed attack at " + x + "," + y +" at gc with type" + AttackController.Instance.currentAttackType);
+                            Debug.Log("executed attack at " + x + "," + y + " at gc with type" + player1CurAtkType);
                         }
                     }
                 }
@@ -295,7 +295,7 @@ public class GameController : MonoBehaviour
                             }
 
                             playerButtons[x, y].gameObject.GetComponent<GridButton>().executeAttack();
-                            //Debug.Log("executed attack at " + x + "," + y + " at gc with type" + AttackController.Instance.currentAttackType);
+                            Debug.Log("executed attack at " + x + "," + y + " at gc with type" + player2CurAtkType);
                         }
                     }
                 }
@@ -333,7 +333,7 @@ public class GameController : MonoBehaviour
                         }
 
                         oppoButtons[x, y].gameObject.GetComponent<GridButton>().executeAttack();
-                        //Debug.Log("executed attack at " + x + "," + y + " at gc with type" + AttackController.Instance.currentAttackType);
+                        Debug.Log("executed attack at " + x + "," + y + " at gc with type" + player1CurAtkType);
                     }
 
 
@@ -374,7 +374,7 @@ public class GameController : MonoBehaviour
                         }
 
                         playerButtons[x, y].gameObject.GetComponent<GridButton>().executeAttack();
-                        //Debug.Log("executed attack at " + x + "," + y + " at gc with type" + AttackController.Instance.currentAttackType);
+                        Debug.Log("executed attack at " + x + "," + y + " at gc with type" + player2CurAtkType);
                     }
                 }
             }
@@ -533,7 +533,7 @@ public class GameController : MonoBehaviour
                 oppoButtons[px, py].gameObject.SetActive(state);
             }
         }
-        Debug.Log("oppo buttons set active: " + state);
+        //Debug.Log("oppo buttons set active: " + state);
     }
 
 
@@ -605,6 +605,7 @@ public class GameController : MonoBehaviour
                 player2curHP = data.p2Hp;
                 player2Atk = data.p2Atk;
                 player2Speed = data.p2Spd;
+                player1Speed = data.p1Spd;
 
                 firstData = false;
 

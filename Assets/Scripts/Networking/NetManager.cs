@@ -111,6 +111,7 @@ public static class NetManager
                 data.p2Hp = int.Parse(new string(converter, 1, 3));
                 data.p2Atk = int.Parse(new string(converter, 4, 3));
                 data.p2Spd = int.Parse(new string(converter, 7, 3));
+                data.p1Spd = int.Parse(new string(converter, 10, 3));
                 break;
             case 's':
                 converter = str.ToCharArray(0, str.Length);
@@ -152,6 +153,8 @@ public class NetData
     //Server Stuff
     public char sts;
     public char flag;
+
+    public int p1Spd;
 
 
     //Plyaer 2

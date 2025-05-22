@@ -13,7 +13,7 @@ public class MainMenu : MonoBehaviour
 
     public void LoadStatSelection()
     {
-        SceneManager.LoadScene("StatSelectScene");
+        SceneManager.LoadScene("StatSelect2");
     }
 
 

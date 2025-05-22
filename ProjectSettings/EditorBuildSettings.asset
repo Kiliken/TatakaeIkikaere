@@ -9,18 +9,15 @@ EditorBuildSettings:
     path: Assets/Scenes/TitleScene.unity
     guid: 6ab49bcd94d5d594483b0f422174afd5
   - enabled: 1
-    path: Assets/Scenes/StatSelectScene.unity
-    guid: 806df5f7545d9414bb1c29e836b67dc3
+    path: Assets/Scenes/AtkSelectScene.unity
+    guid: 2c83ef6651499b548b13116ff07aa5b9
   - enabled: 1
-    path: Assets/Scenes/Vincent.unity
-    guid: 9420e9aa9b374474fa424696a07e44b5
+    path: Assets/Scenes/StatSelect2.unity
+    guid: a1830cd0f81f60949901ab9776acacd2
+  - enabled: 1
+    path: Assets/Scenes/SelectSessionScene.unity
+    guid: 886df845021c8004ebd0fda7b4af1848
   - enabled: 1
     path: Assets/Scenes/Zayar2.unity
     guid: 777258c5497ee634bbf72a186d13e24a
-  - enabled: 1
-    path: Assets/Scenes/Zayar.unity
-    guid: daf91c31ecb9bea43890a051d8993c10
-  - enabled: 1
-    path: Assets/Scenes/AtkSelectScene.unity
-    guid: 2c83ef6651499b548b13116ff07aa5b9
   m_configObjects: {}

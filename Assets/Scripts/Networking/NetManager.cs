@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEditor;
-using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.SceneManagement;
@@ -45,7 +44,7 @@ public static class NetManager
 
     public static readonly string checkFlag = $"{SERVER}checkFlag.php?";
 
-    public static readonly string deleteSession = $"{SERVER}deleteSession.php?";
+    public static readonly string deleteSession = $"{SERVER}destroySession.php?";
 
 
     //SERVER ASSERT

@@ -290,8 +290,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: NumberControllerAtk, Assembly-CSharp
+      - m_Target: {fileID: 1765185597}
+        m_TargetAssemblyTypeName: StatSelectController, Assembly-CSharp
         m_MethodName: OnCompleteBtnPressed
         m_Mode: 1
         m_Arguments:
@@ -1890,6 +1890,8 @@ MonoBehaviour:
   Atk: 0
   Speed: 0
   AtkTypes: 
+  sessionId: 0
+  playerSide: 0
 --- !u!4 &1732056873
 Transform:
   m_ObjectHideFlags: 0

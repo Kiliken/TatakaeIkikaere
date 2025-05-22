@@ -116,6 +116,8 @@ public class GameController : MonoBehaviour
         statSave = GameObject.FindGameObjectWithTag("StatSave").GetComponent<StatSave>();
         //int[] array = { 1, 3, 4, 7 };
         InitiateCharacter(1, statSave.maxHP, statSave.Atk, statSave.Speed, statSave.AtkTypes);
+        gameSession = statSave.sessionId;
+        playerSide = statSave.playerSide;
         //InitiateCharacter(2, 100, 100, 200, array);
 
         //player2CurMove = true;

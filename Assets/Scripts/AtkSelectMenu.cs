@@ -50,6 +50,6 @@ public class AtkSelectMenu : MonoBehaviour
     {
         selectedAtk.Sort();
         statSave.AtkTypes = selectedAtk.ToArray();
-        SceneManager.LoadScene("Zayar2");
+        SceneManager.LoadScene("SelectSessionScene");
     }
 }

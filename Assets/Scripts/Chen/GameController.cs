@@ -72,6 +72,9 @@ public class GameController : MonoBehaviour
     bool dataSent = false;
     bool firstData = true;
 
+    [SerializeField] Image p1HpBar;
+    [SerializeField] Image p2HpBar;
+
 
     private void Awake()
     {
@@ -245,9 +248,18 @@ public class GameController : MonoBehaviour
                 {
                     for (int y = 0; y < 3; y++)
                     {
-                        if (AttackController.Instance.IsTileAttackPattern(new Vector2Int(x, y), AttackController.Instance.currentAttackType))
+                        if (AttackController.Instance.IsTileAttackPattern(new Vector2Int(x, y), player1CurAtkType))
                         {
                             oppoButtons[x, y].gameObject.GetComponent<GridButton>().executeAttack();
+
+                            if (player2pos.x == x && player2pos.y == y)
+                            {
+                                Debug.Log("Player2 HIT");
+                                player2curHP -= 10;
+
+                                p2HpBar.fillAmount = (float)player2curHP / (float)player2maxHP;
+                            }
+
                             //Debug.Log("executed attack at " + x + "," + y +" at gc with type" + AttackController.Instance.currentAttackType);
                         }
                     }
@@ -274,6 +286,14 @@ public class GameController : MonoBehaviour
 
                         if (AttackController.Instance.IsTileAttackPatternOppo(new Vector2Int(x, y), player2CurAtkType))
                         {
+                            if (player1pos.x == x && player1pos.y == y)
+                            {
+                                Debug.Log("Player1 HIT");
+                                player1curHP -= 10;
+
+                                p1HpBar.fillAmount = (float)player1curHP / (float)player1maxHP;
+                            }
+
                             playerButtons[x, y].gameObject.GetComponent<GridButton>().executeAttack();
                             //Debug.Log("executed attack at " + x + "," + y + " at gc with type" + AttackController.Instance.currentAttackType);
                         }
@@ -300,8 +320,18 @@ public class GameController : MonoBehaviour
             {
                 for (int y = 0; y < 3; y++)
                 {
-                    if (AttackController.Instance.IsTileAttackPattern(new Vector2Int(x, y), AttackController.Instance.currentAttackType))
+                    if (AttackController.Instance.IsTileAttackPattern(new Vector2Int(x, y), player1CurAtkType))
                     {
+                        if (player2pos.x == x && player2pos.y == y)
+                        {
+                            Debug.Log("Player2 HIT");
+                            player2curHP -= 10;
+
+                            Debug.Log((float)player2maxHP / (float)player2curHP);
+
+                            p2HpBar.fillAmount = (float)player2curHP / (float)player2maxHP;
+                        }
+
                         oppoButtons[x, y].gameObject.GetComponent<GridButton>().executeAttack();
                         //Debug.Log("executed attack at " + x + "," + y + " at gc with type" + AttackController.Instance.currentAttackType);
                     }
@@ -334,6 +364,15 @@ public class GameController : MonoBehaviour
 
                     if (AttackController.Instance.IsTileAttackPatternOppo(new Vector2Int(x, y), player2CurAtkType))
                     {
+                        if (player1pos.x == x && player1pos.y == y)
+                        {
+                            Debug.Log("Player1 HIT");
+                            player1curHP -= 10;
+
+
+                            p1HpBar.fillAmount =  (float)player1curHP / (float)player1maxHP ;
+                        }
+
                         playerButtons[x, y].gameObject.GetComponent<GridButton>().executeAttack();
                         //Debug.Log("executed attack at " + x + "," + y + " at gc with type" + AttackController.Instance.currentAttackType);
                     }
@@ -562,6 +601,7 @@ public class GameController : MonoBehaviour
 
                 NetManager.ASSERT(data.sts);
 
+                player2maxHP = data.p2Hp;
                 player2curHP = data.p2Hp;
                 player2Atk = data.p2Atk;
                 player2Speed = data.p2Spd;

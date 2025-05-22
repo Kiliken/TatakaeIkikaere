@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 /*
 NETSTRINGS
@@ -51,7 +52,15 @@ public static class NetManager
         if (status == '1')
         {
             Debug.LogError("SERVER SIDE ERROR! CHECK PHP SIDE");
-            //RETURN MAIN MENU
+
+            #if UNITY_EDITOR
+            if (EditorApplication.isPlaying)
+            {
+                UnityEditor.EditorApplication.isPlaying = false;
+            }
+            #endif
+
+
             return;
         }
     }

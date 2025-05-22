@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Networking;
 using System.IO;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
@@ -77,6 +78,11 @@ public class GameController : MonoBehaviour
 
     private int[] attackDamageList = { 0,50,40,30,25,20,12,10,8,7};
 
+    [SerializeField] private int gameSession = 123;
+
+    [SerializeField] GameObject gameWin;
+    [SerializeField] GameObject gameLose;
+
 
     private void Awake()
     {
@@ -118,7 +124,7 @@ public class GameController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(SendInitialData($"id=123&side={playerSide}&hp={player1curHP}&atk={player1Atk}&spd={player1Speed}"));
+        StartCoroutine(SendInitialData($"id={gameSession}&side={playerSide}&hp={player1curHP}&atk={player1Atk}&spd={player1Speed}"));
 
         actionMode = 0;
 
@@ -151,7 +157,7 @@ public class GameController : MonoBehaviour
             else
             {
 
-                StartCoroutine(NetCheckFlag($"id=123"));
+                StartCoroutine(NetCheckFlag($"id={gameSession}"));
 
                 _timer = 0f;
             }
@@ -262,8 +268,8 @@ public class GameController : MonoBehaviour
 
                                 if(player2curHP <= 0)
                                 {
-                                    //StartCoroutine(DeleteSession());
-                                    //win
+                                    StartCoroutine(DeleteSession());
+                                    gameWin.SetActive(true);
                                 }
 
                                 p2HpBar.fillAmount = (float)player2curHP / (float)player2maxHP;
@@ -305,8 +311,8 @@ public class GameController : MonoBehaviour
 
                                 if (player1curHP <= 0)
                                 {
-                                    //StartCoroutine(DeleteSession());
-                                    //Lose
+                                    StartCoroutine(DeleteSession());
+                                    gameLose.SetActive(true);
                                 }
 
                                 p1HpBar.fillAmount = (float)player1curHP / (float)player1maxHP;
@@ -348,8 +354,8 @@ public class GameController : MonoBehaviour
 
                             if (player2curHP <= 0)
                             {
-                                //StartCoroutine(DeleteSession());
-                                //win
+                                StartCoroutine(DeleteSession());
+                                gameWin.SetActive(true);
                             }
 
 
@@ -397,8 +403,8 @@ public class GameController : MonoBehaviour
 
                             if (player1curHP <= 0)
                             {
-                                //StartCoroutine(DeleteSession());
-                                //Lose
+                                StartCoroutine(DeleteSession());
+                                gameLose.SetActive(true);
                             }
 
 
@@ -678,11 +684,11 @@ public class GameController : MonoBehaviour
             {
                 if (firstData)
                 {
-                    StartCoroutine(RetreiveInitialData($"id=123&side={playerSide}"));
+                    StartCoroutine(RetreiveInitialData($"id={gameSession}&side={playerSide}"));
                 }
                 else
                 {
-                    StartCoroutine(RetreiveNormalData($"id=123&side={playerSide}"));
+                    StartCoroutine(RetreiveNormalData($"id={gameSession}&side={playerSide}"));
                 }
 
 
@@ -726,7 +732,7 @@ public class GameController : MonoBehaviour
 
         player1CurAtkType = player1CurMove ? 0 : player1CurAtkType;
 
-        string path = $"id=123&side={playerSide}&hp={player1curHP}&pos={player1pos}&usedAtk={player1CurAtkType}&atkCtr={player1Center}";
+        string path = $"id={gameSession}&side={playerSide}&hp={player1curHP}&pos={player1pos}&usedAtk={player1CurAtkType}&atkCtr={player1Center}";
 
         UnityWebRequest uwr = UnityWebRequest.Get($"{NetManager.sendData}{path}");
 
@@ -790,7 +796,7 @@ public class GameController : MonoBehaviour
    
     IEnumerator DeleteSession()
     {
-        string path = $"id=123";
+        string path = $"id={gameSession}";
         
 
         UnityWebRequest uwr = UnityWebRequest.Get($"{NetManager.deleteSession}{path}");
@@ -814,6 +820,11 @@ public class GameController : MonoBehaviour
             
         }
         uwr.Dispose();
+    }
+
+    public static void ToMainMenu()
+    {
+        SceneManager.LoadScene("TitleScene");
     }
 
 }

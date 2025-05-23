@@ -246,6 +246,8 @@ public class GameController : MonoBehaviour
         AttackController.Instance.p2center = player2Center;
         player1Faster = player1Speed > player2Speed;
 
+        if (player2curHP <= 0 || player1curHP <= 0) return;
+
         if (player1Faster)
         {
             if (actionMode == 1)
@@ -267,17 +269,15 @@ public class GameController : MonoBehaviour
                             if (tempPos.x == x && tempPos.y == y)
                             {
                                 Debug.Log("Player2 HIT");
-                                player2curHP -= attackDamageList[player1CurAtkType];
+                                player2curHP -= attackDamageList[player1CurAtkType] * player1Atk / 100;
 
-                                if(player2curHP <= 0)
-                                {
-                                    StartCoroutine(DeleteSession());
-                                    gameWin.SetActive(true);
-                                }
+                                FindObjectOfType<EnemyGhost>().SetVisible();
+
+
 
                                 p2HpBar.fillAmount = (float)player2curHP / (float)player2maxHP;
 
-                                
+
                             }
 
                             Debug.Log("executed attack at " + x + "," + y + " at gc with type" + player1CurAtkType);
@@ -310,16 +310,12 @@ public class GameController : MonoBehaviour
                             if (tempPos.x == x && tempPos.y == y)
                             {
                                 Debug.Log("Player1 HIT");
-                                player1curHP -= attackDamageList[player2CurAtkType];
+                                player1curHP -= attackDamageList[player2CurAtkType] * player2Atk / 100;
 
-                                if (player1curHP <= 0)
-                                {
-                                    StartCoroutine(DeleteSession());
-                                    gameLose.SetActive(true);
-                                }
+
 
                                 p1HpBar.fillAmount = (float)player1curHP / (float)player1maxHP;
-                                
+
                             }
 
                             playerButtons[x, y].gameObject.GetComponent<GridButton>().executeAttack();
@@ -330,12 +326,24 @@ public class GameController : MonoBehaviour
             }
         }
 
-
+        if (player2curHP <= 0)
+        {
+            StartCoroutine(DeleteSession());
+            gameWin.SetActive(true);
+        }
+        else if (player1curHP <= 0)
+        {
+            StartCoroutine(DeleteSession());
+            gameLose.SetActive(true);
+        }
 
     }
 
     private void executeP1()
     {
+
+        if (player2curHP <= 0 || player1curHP <= 0) return;
+
         if (player1CurMove)
         {
             StartCoroutine(p1move());
@@ -353,15 +361,9 @@ public class GameController : MonoBehaviour
                         if (tempPos.x == x && tempPos.y == y)
                         {
                             Debug.Log("Player2 HIT");
-                            player2curHP -= attackDamageList[player1CurAtkType];
+                            player2curHP -= attackDamageList[player1CurAtkType] * player1Atk / 100;
 
                             FindObjectOfType<EnemyGhost>().SetVisible();
-
-                            if (player2curHP <= 0)
-                            {
-                                StartCoroutine(DeleteSession());
-                                gameWin.SetActive(true);
-                            }
 
 
 
@@ -380,10 +382,24 @@ public class GameController : MonoBehaviour
             AttackController.Instance.ExecuteAttack();
 
         }
+
+        if (player2curHP <= 0)
+        {
+            StartCoroutine(DeleteSession());
+            gameWin.SetActive(true);
+        }
+        else if (player1curHP <= 0)
+        {
+            StartCoroutine(DeleteSession());
+            gameLose.SetActive(true);
+        }
     }
 
     private void executeP2()
     {
+
+        if (player2curHP <= 0 || player1curHP <= 0) return;
+
         if (player2CurMove)
         {
             StartCoroutine(p2move());
@@ -404,16 +420,10 @@ public class GameController : MonoBehaviour
                         if (tempPos.x == x && tempPos.y == y)
                         {
                             Debug.Log("Player1 HIT");
-                            player1curHP -= attackDamageList[player2CurAtkType];
-
-                            if (player1curHP <= 0)
-                            {
-                                StartCoroutine(DeleteSession());
-                                gameLose.SetActive(true);
-                            }
+                            player1curHP -= attackDamageList[player2CurAtkType] * player2Atk / 100;
 
 
-                            p1HpBar.fillAmount =  (float)player1curHP / (float)player1maxHP ;
+                            p1HpBar.fillAmount = (float)player1curHP / (float)player1maxHP;
                         }
 
                         playerButtons[x, y].gameObject.GetComponent<GridButton>().executeAttack();
@@ -421,6 +431,17 @@ public class GameController : MonoBehaviour
                     }
                 }
             }
+        }
+        
+        if (player2curHP <= 0)
+        {
+            StartCoroutine(DeleteSession());
+            gameWin.SetActive(true);
+        }
+        else if (player1curHP <= 0)
+        {
+            StartCoroutine(DeleteSession());
+            gameLose.SetActive(true);
         }
     }
 

@@ -173,8 +173,9 @@ public class GameController : MonoBehaviour
         //Debug.Log("update action");
         if (actionMode == 0)
         {
+            FindObjectOfType<EnemyGhost>().SetInvisible();
             resetComplete = false;
-            //Debug.Log($"action updated to 0000000000000000000000000000000000000000000000000");
+            //Debug.Log($"action updated to 0");
             confirmB.SetActive(false);
             backB.SetActive(false);
             setPlayerButtonsActive(true);
@@ -353,6 +354,8 @@ public class GameController : MonoBehaviour
                         {
                             Debug.Log("Player2 HIT");
                             player2curHP -= attackDamageList[player1CurAtkType];
+
+                            FindObjectOfType<EnemyGhost>().SetVisible();
 
                             if (player2curHP <= 0)
                             {

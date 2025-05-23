@@ -27,4 +27,20 @@ public class EnemyGhost : MonoBehaviour
     {
         return Vector2Int.Distance(prevPos, newPos) <= 1f;
     }
+
+    public void SetInvisible()
+    {
+        foreach (Renderer r in GetComponentsInChildren<Renderer>())
+        {
+            r.enabled = false;
+        }
+    }
+
+    public void SetVisible()
+    {
+        foreach (Renderer r in GetComponentsInChildren<Renderer>())
+        {
+            r.enabled = true;
+        }
+    }
 }

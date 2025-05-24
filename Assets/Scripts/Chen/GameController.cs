@@ -78,7 +78,7 @@ public class GameController : MonoBehaviour
 
     private int[] attackDamageList = { 0,50,40,30,25,20,12,10,8,7};
 
-    [SerializeField] private int gameSession = 123;
+    [SerializeField] private string gameSession = "123";
 
     [SerializeField] GameObject gameWin;
     [SerializeField] GameObject gameLose;

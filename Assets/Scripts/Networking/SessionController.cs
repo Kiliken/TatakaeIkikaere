@@ -43,8 +43,7 @@ public class SessionController : MonoBehaviour
         test = idString.text;
         //sessionId = Int32.Parse(test);
         char[] test2 = test.ToCharArray(0, test.Length);
-        sessionId = int.Parse(new string(test2, 0, 3));
-        statSave.sessionId = sessionId;
+        statSave.sessionId = new string(test2, 0, 3);
         statSave.playerSide = player[0];
         SceneManager.LoadScene("Zayar2");
     }
@@ -54,8 +53,7 @@ public class SessionController : MonoBehaviour
         test = idString.text;
         //sessionId = Int32.Parse(test);
         char[] test2 = test.ToCharArray(0, test.Length);
-        sessionId = int.Parse(new string(test2, 0, 3));
-        statSave.sessionId = sessionId;
+        statSave.sessionId = new string(test2, 0, 3);
         statSave.playerSide = player[1];
         SceneManager.LoadScene("Zayar2");
     }

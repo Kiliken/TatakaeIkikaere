@@ -354,6 +354,8 @@ MonoBehaviour:
   Atk: 130
   Speed: 120
   AtkTypes: 01000000030000000500000007000000
+  sessionId: 0
+  playerSide: 0
 --- !u!4 &311068380
 Transform:
   m_ObjectHideFlags: 0
@@ -1823,8 +1825,8 @@ MonoBehaviour:
   player1AtkTypes: 
   player2AtkTypes: 
   player1CurAtkType: 0
-  player1Center: {x: 0, y: 0}
-  player2Center: {x: 0, y: 0}
+  player1Center: {x: 1, y: 1}
+  player2Center: {x: 1, y: 1}
   player2CurAtkType: 0
   player1Faster: 0
   fadeInPanel: {fileID: 1627863826}

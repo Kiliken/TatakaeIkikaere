@@ -1,9 +1,21 @@
 <?php
+
+if(!file_exists("./Sessions/S{$_GET["id"]}.json")) {
+	//$startData["id"]= $_GET["id"];
+    $startData["flag"] = 0;
+    $startData["skadoosh"] = 0;
+	$newSession = json_encode($startData);
+	file_put_contents("./Sessions/S{$_GET["id"]}.json", $newSession);
+}
+
 $str = file_get_contents("./Sessions/S{$_GET["id"]}.json");
 $data = json_decode($str, true);
 
 //player side
 $pS = $_GET["side"];
+if($data["flag"] == 0){
+	$_GET["spd"] += 1;
+}
 
 if(isset($_GET["hp"])) {
 	$data["player"][$pS]["hp"] = $_GET["hp"];

@@ -12,11 +12,13 @@ switch($pS){
     	$hp = $data["player"]["b"]["hp"];
         $atk = $data["player"]["b"]["atk"];
         $spd = $data["player"]["b"]["spd"];
+        $thisSpd = $data["player"]["r"]["spd"];
     	break;
     case 'b':
     	$hp = $data["player"]["r"]["hp"];
         $atk = $data["player"]["r"]["atk"];
         $spd = $data["player"]["r"]["spd"];
+        $thisSpd = $data["player"]["b"]["spd"];
     	break;
 }
 
@@ -28,7 +30,7 @@ if ($data["flag"] == 4)
 $newJsonString = json_encode($data);
 file_put_contents("./Sessions/S{$_GET["id"]}.json", $newJsonString);
 
-echo "0{$hp}{$atk}{$spd}";
+echo "0{$hp}{$atk}{$spd}{$thisSpd}";
 
 /*
 echo <pre>

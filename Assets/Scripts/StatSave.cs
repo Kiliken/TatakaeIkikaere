@@ -8,7 +8,7 @@ public class StatSave : MonoBehaviour
     public int Atk;
     public int Speed;
     public int[] AtkTypes;
-    public int sessionId;
+    public string sessionId;
     public char playerSide;
 
 
